@@ -56,8 +56,8 @@ var state_manager = {
 		browser.addEventListener('DOMContentLoaded', function () {
 			rcxMain.disable();
 			rcxMain.popup_window.getBrowser=function() { return  browser; };
-			rcxMain.enable(state_manager.current_window.BrowserApp.selectedTab.window.document);}
-		, false);			
+			rcxMain.enable(browser.contentWindow.document);
+		}, false);
 		this.current_window.BrowserApp.selectedTab.window.addEventListener("unload", rcxMain.disable, false);
 	},
 	
