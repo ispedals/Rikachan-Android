@@ -391,16 +391,11 @@ var rcxMain = {
 		},
 
 		destroy: function () {
-			if (this.current_element) {
+			try {
 				this.current_element.removeEventListener('mousedown', this.listener, false);
 				this.current_element.parentNode.removeChild(this.current_element);
-				this.current_element = null;
-				this.listener = null;
-			}
-			if (this.current_css) {
 				this.current_css.parentNode.removeChild(this.current_css);
-				this.current_css = null;
-			}
+			} catch (e) {}
 		}
 	},
 
@@ -431,11 +426,13 @@ var rcxMain = {
 	},
 
 	disable: function () {
-		if (this.current_document) {
+		//current_document may be dead when we get here (though we should have removed the reference before this so this should not happen)
+		try {
 			this.current_document.removeEventListener('mousemove', this.onMouseMove, false);
 			this.clearView(true);
-			this.current_document = null;
 		}
+		catch (e) {}
+		this.current_document = null;
 		this.popup_window.getBrowser = null;
 		if (this.previous_term) {
 			this.previous_term.target = null;
