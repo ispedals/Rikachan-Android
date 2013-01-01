@@ -54,9 +54,6 @@ var state_manager = {
 		var browser =  this.current_window.BrowserApp.selectedBrowser;
 		//need to wait until DOM has loaded
 		browser.addEventListener('DOMContentLoaded', function () {
-			browser.removeEventListener("DOMContentLoaded", arguments.callee, false);
-			//however if rikaichan is disabled prior to DOM loading, don't continue enabling rikaichan for the current document
-			if(!rcxMain.enabled) { return; } 
 			rcxMain.disable();
 			rcxMain.popup_window.getBrowser=function() { return  browser; };
 			rcxMain.enable(state_manager.current_window.BrowserApp.selectedTab.window.document);}
