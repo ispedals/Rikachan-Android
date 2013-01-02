@@ -52,11 +52,19 @@ var state_manager = {
 		if(!(DOMwindow.document instanceof DOMwindow.HTMLDocument) || DOMwindow.frameElement) { return;}
 		var browser =  this.current_window.BrowserApp.selectedBrowser;
 		//need to wait until DOM has loaded
-		browser.addEventListener('DOMContentLoaded', function () {
+		if (browser.webProgress.isLoadingDocument) {
+			browser.addEventListener('DOMContentLoaded', function () {
+				rcxMain.disable();
+				rcxMain.popup_window.getBrowser=function() { return  browser; };
+				rcxMain.enable(browser.contentWindow.document);
+			}, false);
+		}
+		//the current browser has already finished loading (we have switched to a previosly loaded tab)
+		else {
 			rcxMain.disable();
 			rcxMain.popup_window.getBrowser=function() { return  browser; };
 			rcxMain.enable(browser.contentWindow.document);
-		}, false);
+		}
 		this.current_window.BrowserApp.selectedTab.window.addEventListener("unload", rcxMain.disable, false);
 	},
 	
