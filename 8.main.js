@@ -16,7 +16,6 @@ var pageChangeListener = {
  
 	onLocationChange: function(aProgress, aRequest, aURI, aFlags)
 	{
-		if(aFlags)  {return;} //aFlags is defined if the document did not change
 		state_manager._init(aProgress.DOMWindow);
 	},
  
