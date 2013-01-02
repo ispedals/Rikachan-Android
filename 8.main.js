@@ -28,7 +28,7 @@ var pageChangeListener = {
 function watchTab(aEvent) {
 	// the target is a XUL browser element
 	var browser = aEvent.target;
-	state_manager._init(browser.ownerDocument.defaultView);
+	state_manager._init(browser.contentWindow);
 	browser.addProgressListener(pageChangeListener, Components.interfaces.nsIWebProgress.NOTIFY_LOCATION);
 }
 
