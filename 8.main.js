@@ -29,6 +29,13 @@ function watchTab(aEvent) {
 	// the target is a XUL browser element
 	var browser = aEvent.target;
 	state_manager._init(browser.contentWindow);
+	var tabs = state_manager.current_window.BrowserApp.tabs;
+	tabs.forEach(function(tab) {
+		try {
+			tab.browser.removeProgressListener(pageChangeListener);
+		} catch (e) {} //remove the ProgressListener from the now inactivated browser; we need to iterate over all the tabs because we don't now what the previous browser was
+		// need to use try/catch because removeProgressListener throws if the listener was not previously attached
+	});
 	browser.addProgressListener(pageChangeListener, Components.interfaces.nsIWebProgress.NOTIFY_LOCATION);
 }
 
