@@ -129,24 +129,25 @@ var text_manipulator = {
 		return sel.toString();
 	}
 };
-// rcxMain, when initialized, binds a mousemove listener to the DOM document that was passed to it. A tap results in an event that can be used to determine what text node
-// was tapped. It then uses Rikaichan's logic to determine if the text node contains a Japanese word, finds its definition using rcxData, and displays the definitions using popup_window
+// rcxMain, on enable, initializes its properties. Prior to enable(), both rcxMain.popup_window.getBrowser() must be assigned a function and rcxMain.current_document must be 
+// assigned a getter (using Object.defineProperty). A tap results in an event that can be used to determine what text node was tapped.
+// It then uses Rikaichan's logic to determine if the text node contains a Japanese word, finds its definition using rcxData, and displays the definitions using popup_window
 // the last sucessful term is stored in previous_term
 // depends on these variables being globally defined:
 //	rcxData
 //	rcxConfig
 //	resourceURI
 //	standard Mozilla addon constants
-// use by calling rcxMain.enable(<reference to DOM document>)
+// use by calling rcxMain.enable()
 var rcxMain = {
-	current_document: null, //reference to the DOM document
+	current_document: null, //reference to the DOM document; this must be assigned as a getter prior to enable()
 	
 	enabled: false,
 
 	// popup_window manages the actual DOM popup element
 	// show() creates the element and attaches it to the given DOM document
 	// destroy() removes the element
-	// getBrowser() must be redefined as a function that returns a chrome browser if rcxMain will run in a chrome context. This must happen prior to rcxMain.enable()
+	// getBrowser() must be redefined as a function that returns a chrome browser prior to rcxMain.enable()
 	// 
 	// The popup element differs from RIkaichan's element by having five buttons on the corners. These buttons are:
 	// move to the preceeding character, move to the next word, save to file, alternative view, and copy to clipboard.
