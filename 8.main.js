@@ -40,7 +40,6 @@ var state_manager = {
 		rcxMain.popup_window.getBrowser=function() { return aWindow.BrowserApp.selectedBrowser;  };
 		rcxMain.enable(aWindow.BrowserApp.selectedTab.window.document);
 		showToast(window, "Rikaichan enabled");
-		aWindow.BrowserApp.selectedTab.window.addEventListener("unload", rcxMain.disable, false);
 		aWindow.BrowserApp.deck.addEventListener("TabSelect", watchTab, false);
 		this.current_window = aWindow;
 	},
@@ -57,7 +56,6 @@ var state_manager = {
 	// removes the various listeners attached to chrome
 	disable: function (window) {
 		rcxMain.disable();
-		window.BrowserApp.selectedTab.window.removeEventListener("unload", rcxMain.disable, false);
 		window.BrowserApp.deck.removeEventListener("TabSelect", watchTab, false);
 		this.current_window = null;
 	}
