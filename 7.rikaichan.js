@@ -396,6 +396,8 @@ var rcxMain = {
 				this.current_element.parentNode.removeChild(this.current_element);
 				this.current_css.parentNode.removeChild(this.current_css);
 			} catch (e) {}
+			this.current_element = null;
+			this.current_css = null;
 		}
 	},
 
