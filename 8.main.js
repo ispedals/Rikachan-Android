@@ -11,8 +11,6 @@ function watchTab(aEvent) {
 }
 
 var state_manager = {
-	current_window:null, //native window
-	
 	toggle: function (window) {
 		if(rcxMain.enabled) { 
 			showToast(window, "Rikaichan disabled");			
@@ -37,7 +35,6 @@ var state_manager = {
 		rcxMain.enable();
 		showToast(window, "Rikaichan enabled");
 		aWindow.BrowserApp.deck.addEventListener("TabSelect", watchTab, false);
-		this.current_window = aWindow;
 	},
 	
 	desktop_init: function (window) {
@@ -56,7 +53,6 @@ var state_manager = {
 		rcxMain.disable();
 		aWindow.BrowserApp.deck.removeEventListener("TabSelect", watchTab, false);
 		aWindow.BrowserApp.selectedBrowser.removeEventListener('mousemove', rcxMain.onMouseMove, false);
-		this.current_window = null;
 	}
 	
 };
