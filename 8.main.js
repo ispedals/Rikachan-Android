@@ -4,39 +4,10 @@ function showToast(aWindow, message) { aWindow.NativeWindow.toast.show(message, 
 
 var gRikaichanMenuId = null;
 
-var pageChangeListener = {
-	QueryInterface: function(aIID)
-	{
-		if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
-		   aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
-		   aIID.equals(Components.interfaces.nsISupports))
-			return this;
-		throw Components.results.NS_NOINTERFACE;
-	},
- 
-	onLocationChange: function(aProgress, aRequest, aURI, aFlags)
-	{
-		state_manager._init(aProgress.DOMWindow);
-	},
- 
-	onStateChange: function(a, b, c, d) {},
-	onProgressChange: function(a, b, c, d, e, f) {},
-	onStatusChange: function(a, b, c, d) {},
-	onSecurityChange: function(a, b, c) {}
-};
-
 function watchTab(aEvent) {
 	// the target is a XUL browser element
 	var browser = aEvent.target;
 	state_manager._init(browser.contentWindow);
-	var tabs = state_manager.current_window.BrowserApp.tabs;
-	tabs.forEach(function(tab) {
-		try {
-			tab.browser.removeProgressListener(pageChangeListener);
-		} catch (e) {} //remove the ProgressListener from the now inactivated browser; we need to iterate over all the tabs because we don't now what the previous browser was
-		// need to use try/catch because removeProgressListener throws if the listener was not previously attached
-	});
-	browser.addProgressListener(pageChangeListener, Components.interfaces.nsIWebProgress.NOTIFY_LOCATION);
 }
 
 var state_manager = {
@@ -58,21 +29,9 @@ var state_manager = {
 		//DOMwindow can be both the chrome window or a DOM window
 		if(!(DOMwindow.document instanceof DOMwindow.HTMLDocument) || DOMwindow.frameElement) { return;}
 		var browser =  this.current_window.BrowserApp.selectedBrowser;
-		//need to wait until DOM has loaded
-		if (browser.webProgress.isLoadingDocument) {
-			browser.addEventListener('DOMContentLoaded', function () {
-				rcxMain.disable();
-				rcxMain.popup_window.getBrowser=function() { return  browser; };
-				rcxMain.enable(browser.contentWindow.document);
-			}, false);
-		}
-		//the current browser has already finished loading (we have switched to a previosly loaded tab)
-		else {
-			rcxMain.disable();
-			rcxMain.popup_window.getBrowser=function() { return  browser; };
-			rcxMain.enable(browser.contentWindow.document);
-		}
-		this.current_window.BrowserApp.selectedTab.window.addEventListener("unload", rcxMain.disable, false);
+		rcxMain.disable();
+		rcxMain.popup_window.getBrowser=function() { return  browser; };
+		rcxMain.enable();
 	},
 	
 	//for native UI
@@ -82,7 +41,6 @@ var state_manager = {
 		rcxMain.enable(aWindow.BrowserApp.selectedTab.window.document);
 		showToast(window, "Rikaichan enabled");
 		aWindow.BrowserApp.selectedTab.window.addEventListener("unload", rcxMain.disable, false);
-		aWindow.BrowserApp.selectedBrowser.addProgressListener(pageChangeListener, Components.interfaces.nsIWebProgress.NOTIFY_LOCATION);
 		aWindow.BrowserApp.deck.addEventListener("TabSelect", watchTab, false);
 		this.current_window = aWindow;
 	},
@@ -101,7 +59,6 @@ var state_manager = {
 		rcxMain.disable();
 		window.BrowserApp.selectedTab.window.removeEventListener("unload", rcxMain.disable, false);
 		window.BrowserApp.deck.removeEventListener("TabSelect", watchTab, false);
-		window.BrowserApp.selectedBrowser.removeProgressListener(pageChangeListener);
 		this.current_window = null;
 	}
 	
