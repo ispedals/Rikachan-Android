@@ -7,7 +7,7 @@ var gRikaichanMenuId = null;
 function watchTab(aEvent) {
 	// the target is a XUL browser element
 	var browser = aEvent.target;
-	state_manager._init(browser.contentWindow);
+	state_manager._init(browser);
 }
 
 var state_manager = {
@@ -23,21 +23,17 @@ var state_manager = {
 		}
 	}, 
 	
-	//called when document has changed but rikaichan is enabled
-	// setups of rikaichan with the new document
-	_init: function (DOMwindow) {
-		//DOMwindow can be both the chrome window or a DOM window
-		if(!(DOMwindow.document instanceof DOMwindow.HTMLDocument) || DOMwindow.frameElement) { return;}
-		var browser =  this.current_window.BrowserApp.selectedBrowser;
-		rcxMain.disable();
-		rcxMain.popup_window.getBrowser=function() { return  browser; };
-		rcxMain.enable();
+	//called when the browser changes
+	_init: function (browser) {
+		browser.addEventListener('mousemove', rcxMain.onMouseMove, false);
 	},
 	
 	//for native UI
 	init: function (window) {
 		var aWindow = window;
+		Object.defineProperty(rcxMain, 'current_document', { get: function() { return aWindow.BrowserApp.selectedBrowser.contentWindow.document; } });
 		rcxMain.popup_window.getBrowser=function() { return aWindow.BrowserApp.selectedBrowser;  };
+		this._init(aWindow.BrowserApp.selectedBrowser);
 		rcxMain.enable();
 		showToast(window, "Rikaichan enabled");
 		aWindow.BrowserApp.deck.addEventListener("TabSelect", watchTab, false);
@@ -47,16 +43,19 @@ var state_manager = {
 	desktop_init: function (window) {
 		var aWindow = window;
 		var browser = aWindow.gBrowser.mCurrentBrowser;
+		Object.defineProperty(rcxMain, 'current_document', { get: function() { return  aWindow.gBrowser.mCurrentBrowser.contentWindow.document; } });
 		rcxMain.popup_window.getBrowser=function() { return browser; };
-		rcxMain.enable(browser.contentWindow.document);
-		browser.contentWindow.addEventListener("unload", rcxMain.disable, false);
+		this._init(browser);
+		rcxMain.enable();
 	},
 
 	//only needs to be called when in NativeUI
 	// removes the various listeners attached to chrome
 	disable: function (window) {
+		var aWindow = window;
 		rcxMain.disable();
-		window.BrowserApp.deck.removeEventListener("TabSelect", watchTab, false);
+		aWindow.BrowserApp.deck.removeEventListener("TabSelect", watchTab, false);
+		aWindow.BrowserApp.selectedBrowser.removeEventListener('mousemove', rcxMain.onMouseMove, false);
 		this.current_window = null;
 	}
 	
