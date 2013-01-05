@@ -38,7 +38,7 @@ var state_manager = {
 	init: function (window) {
 		var aWindow = window;
 		rcxMain.popup_window.getBrowser=function() { return aWindow.BrowserApp.selectedBrowser;  };
-		rcxMain.enable(aWindow.BrowserApp.selectedTab.window.document);
+		rcxMain.enable();
 		showToast(window, "Rikaichan enabled");
 		aWindow.BrowserApp.deck.addEventListener("TabSelect", watchTab, false);
 		this.current_window = aWindow;

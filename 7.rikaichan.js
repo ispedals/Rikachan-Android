@@ -401,10 +401,8 @@ var rcxMain = {
 		}
 	},
 
-	enable: function (doc) {
+	enable: function () {
 		rcxData.init();
-		this.current_document = doc;
-		this.current_document.addEventListener('mousemove', this.onMouseMove, false);
 		this.previous_term = {
 			target: null, //DOM node containing previous term
 			position: { //position of DOM node
@@ -428,14 +426,10 @@ var rcxMain = {
 	},
 
 	disable: function () {
-		//current_document may be dead when we get here (though we should have removed the reference before this so this should not happen)
 		try {
-			this.current_document.removeEventListener('mousemove', this.onMouseMove, false);
 			this.clearView(true);
 		}
 		catch (e) {}
-		this.current_document = null;
-		this.popup_window.getBrowser = null;
 		if (this.previous_term) {
 			this.previous_term.target = null;
 			this.previous_term.rangeNode = null;
