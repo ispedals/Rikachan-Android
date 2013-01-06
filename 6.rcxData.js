@@ -154,6 +154,56 @@ var rcxData = {
 		0x3062,0x3065,0x3067,0x3069,0xFF85,0xFF86,0xFF87,0xFF88,0xFF89,0x3070,0x3073,0x3076,0x3079,0x307C],
 	cs:[0x3071,0x3074,0x3077,0x307A,0x307D],
 	
+	convertKatakanaToHiragana: function(word) {
+		var i, u, v, r, p;
+		var trueLen = [0];
+		
+		// half & full-width katakana to hiragana conversion
+		// note: katakana vu is never converted to hiragana
+
+		p = 0;
+		r = '';
+		for (i = 0; i < word.length; ++i) {
+			u = v = word.charCodeAt(i);
+			
+			if (u <= 0x3000) break;
+
+			// full-width katakana to hiragana
+			if ((u >= 0x30A1) && (u <= 0x30F3)) {
+				u -= 0x60;
+			}
+			// half-width katakana to hiragana
+			else if ((u >= 0xFF66) && (u <= 0xFF9D)) {
+				u = this.ch[u - 0xFF66];
+			}
+			// voiced (used in half-width katakana) to hiragana
+			else if (u == 0xFF9E) {
+				if ((p >= 0xFF73) && (p <= 0xFF8E)) {
+					r = r.substr(0, r.length - 1);
+					u = this.cv[p - 0xFF73];
+				}
+			}
+			// semi-voiced (used in half-width katakana) to hiragana
+			else if (u == 0xFF9F) {
+				if ((p >= 0xFF8A) && (p <= 0xFF8E)) {
+					r = r.substr(0, r.length - 1);
+					u = this.cs[p - 0xFF8A];
+				}
+			}
+			// ignore J~
+			else if (u == 0xFF5E) {
+				p = 0;
+				continue;
+			}
+			
+			r += String.fromCharCode(u);
+			trueLen[r.length] = i + 1;	// need to keep real length because of the half-width semi/voiced conversion
+			p = v;
+		}
+				
+		return r;
+	},
+	
 	wordSearch: function(word) {
 		var ds = this.selected;
 		do {
