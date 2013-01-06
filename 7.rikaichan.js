@@ -730,6 +730,13 @@ var rcxMain = {
 
 			pitchDB.close();
 
+			// If user wants to hide the part-of-speech unless , or | is present
+			if(rcxConfig.hidepitchaccentpos) {
+				if((pitch.indexOf(",") == -1) && (pitch.indexOf("|") == -1)) {
+					pitch = pitch.replace(/\(.*?\)/g, "")
+				}
+			}
+
 			return pitch;
 		}
 		catch(ex) {

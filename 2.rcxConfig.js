@@ -82,6 +82,9 @@ const PREF_ROOT =  "extensions.rikaichanandroid.";
 	// kanji
 	//'kindex': 1,
 
+	//pitch
+	'hidepitchaccentpos' : 2,
+
 	// clipboard / save file
 	// sfcs and ubom were configurable in rikaichan, but are currently hardcoded to utf-8 with BOM
 	'sfile': 1,
@@ -109,6 +112,8 @@ var rcxConfig={
 
 	'kindex' : 'COMP,H,L,E,DK,N,V,Y,P,IN,I,U', //kanji information, currently not configurable
 	
+	'hidepitchaccentpos': true,
+
 	// 'sfile': "C:\\Users\\Owner\\Desktop\\save.txt", //hardcoded sfile values for testing
 	//'sfile': "/sdcard/Download/Words.txt",
 	'sfile': '',
