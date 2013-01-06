@@ -95,6 +95,57 @@ var text_manipulator = {
 		return text;
 	},
 
+	getInlineTextPrev: function (node, selEndList, maxLength) {
+		if ((node.nodeType == Node.TEXT_NODE) && (node.data.length == 0)) {
+			return ''
+		}
+
+		let text = '';
+
+		let result = node.ownerDocument.evaluate('descendant-or-self::text()[not(parent::rp) and not(ancestor::rt)]',
+		node, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+
+		while ((text.length < maxLength) && (node = result.iterateNext())) {
+			if (text.length + node.data.length >= maxLength) {
+				text += node.data.substr(node.data.length - (maxLength - text.length), maxLength - text.length);
+			} else {
+				text += node.data;
+			}
+
+			selEndList.push(node);
+		}
+
+		return text;
+	},
+
+	getPrev: function (node) {
+		do {
+			if (node.previousSibling) {
+				return node.previousSibling;
+			}
+			node = node.parentNode;
+		}
+		while ((node) && (this.inlineNames[node.nodeName]));
+		return null;
+	},
+
+	getTextFromRangePrev: function (rangeParent, offset, selEndList, maxLength) {
+		if (rangeParent.ownerDocument.evaluate('boolean(parent::rp or ancestor::rt)',
+		rangeParent, null, XPathResult.BOOLEAN_TYPE, null).booleanValue) {
+			return '';
+		}
+
+		let text = '';
+		var prevNode = rangeParent;
+
+		while ((text.length < maxLength) && ((prevNode = this.getPrev(prevNode)) != null) && (this.inlineNames[prevNode.nodeName])) {
+			textTemp = text;
+			text = this.getInlineTextPrev(prevNode, selEndList, maxLength - text.length) + textTemp;
+		}
+
+		return text;
+	},
+
 	highlightMatch: function(doc, rp, ro, matchLen, selEndList, tdata) {
 		if (selEndList.length === 0) return;
 
