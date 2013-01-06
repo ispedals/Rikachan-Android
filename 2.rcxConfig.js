@@ -118,14 +118,14 @@ var rcxConfig={
 	'sfile': '',
 	'sfcs': 'utf-8',
 	'ubom': true,
-	'smaxfe': 1,
-	'smaxfk': 1,
-	'smaxce': 7,
-	'smaxck': 1,
+	// 'smaxfe': 1,
+	// 'smaxfk': 1,
+	// 'smaxce': 7,
+	// 'smaxck': 1,
 	'snlf': 1,
 	'ssep': 'Tab',
 
-	'saveformat': '$d$t$r$t$n'
+	'saveformat': '$d$t$r$t$n',
 	'atags': '',
 
 	'popdelay': 50,

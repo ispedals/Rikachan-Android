@@ -672,16 +672,16 @@ var rcxMain = {
 		var selEndList = [];
 
 		// The text here will be used to lookup the word
-		var text = this.getTextFromRange(rangeParent, rangeOffset, selEndList, 20);
+		var text = text_manipulator.getTextFromRange(rangeParent, rangeOffset, selEndList, 20);
 
 		// The text from the currently selection node + 50 more characters from the next nodes    
-		var sentence = this.getTextFromRange(rangeParent, 0, selEndList, rangeParent.data.length + 50);
+		var sentence = text_manipulator.getTextFromRange(rangeParent, 0, selEndList, rangeParent.data.length + 50);
 
 		// 50 characters from the previous nodes.
 		// The above sentence var will stop at first ruby tag encountered to the 
 		// left because it has a different node type. prevSentence will start where 
 		// the above sentence left off moving to the left and will capture the ruby tags.
-		var prevSentence = this.getTextFromRangePrev(rangeParent, 0, selEndList, 50);
+		var prevSentence = text_manipulator.getTextFromRangePrev(rangeParent, 0, selEndList, 50);
 
 		// Combine the full sentence text, including stuff that will be chopped off later.
 		sentence = prevSentence + sentence;
@@ -699,7 +699,7 @@ var rcxMain = {
 
 		// Find the last character of the sentence
 		while (i < sentence.length) {
-			if (sentence[i] == "。" || sentence[i] == "\n" || sentence[i] == "？" || 　sentence[i] == "！") {
+			if (sentence[i] == "\u3002" || sentence[i] == "\n" || sentence[i] == "\uFF1F" ||  sentence[i] == "\uFF01") {
 				sentenceEndPos = i;
 				break;
 			} else if (i == (sentence.length - 1)) {
@@ -713,7 +713,7 @@ var rcxMain = {
 
 		// Find the first character of the sentence
 		while (i >= 0) {
-			if (sentence[i] == "。" || sentence[i] == "\n" || sentence[i] == "？" || 　sentence[i] == "！") {
+			if (sentence[i] == "\u3002" || sentence[i] == "\n" || sentence[i] == "\uFF1F" || sentence[i] == "\uFF01") {
 				sentenceStartPos = i + 1;
 				break;
 			} else if (i == 0) {
@@ -822,35 +822,23 @@ var rcxMain = {
 	lastFound: null, //array of definitions of last defined term
 
 	savePrep: function (clip) {
-		var me, mk;
 		var text;
 		var i;
 		var f;
 		var e;
+		var s;
+		var w;
+		var sWBlank;
 
 		f = this.lastFound;
+		s = this.sentence;
+		sWBlank = this.sentenceWBlank;
+		w = this.word;
+
 		if ((!f) || (f.length == 0)) return null;
 
-		if (clip) {
-			me = rcxConfig.smaxce;
-			mk = rcxConfig.smaxck;
-		} else {
-			me = rcxConfig.smaxfe;
-			mk = rcxConfig.smaxfk;
-		}
-
-		text = '';
-		for (i = 0; i < f.length; ++i) {
-			e = f[i];
-			if (e.kanji) {
-				if (mk-- <= 0) continue
-				text += rcxData.makeText(e, 1);
-			} else {
-				if (me <= 0) continue;
-				text += rcxData.makeText(e, me);
-				me -= e.data.length;
-			}
-		}
+		e = f[0];
+		text = rcxData.makeText(e, w, s, sWBlank, false, this.current_document.location.href);
 
 		if (rcxConfig.snlf == 1) text = text.replace(/\n/g, '\r\n');
 

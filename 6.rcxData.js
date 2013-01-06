@@ -636,7 +636,7 @@ var rcxData = {
 	// sentenceWBlank = Like sentence except the highlighted word is replaced with blanks
 	// saveKana             = Replace kanji with kana (that is, $d=$r)
 	// url                          = Source URL
-	_makeText: function (entry, word, sentence, sentenceWBlank, saveKana, url) {
+	makeText: function (entry, word, sentence, sentenceWBlank, saveKana, url) {
 		var entryData;
 		var b;
 		var i, j, k;
@@ -703,59 +703,6 @@ var rcxData = {
 		return saveText;
 	},
 
-	makeText: function(entry, max) {
-		var e;
-		var b;
-		var i, j;
-		var t;
-
-		if (entry == null) return '';
-		if (!this.ready) this.init();
-
-		b = [];
-
-		if (entry.kanji) {
-			b.push(entry.kanji + '\n');
-			b.push((entry.eigo.length ? entry.eigo : '-') + '\n');
-
-			b.push(entry.onkun.replace(/\.([^\u3001]+)/g, '\uFF08$1\uFF09') + '\n');
-			if (entry.nanori.length) {
-				b.push('\u540D\u4E57\u308A\t' + entry.nanori + '\n');
-			}
-			if (entry.bushumei.length) {
-				b.push('\u90E8\u9996\u540D\t' + entry.bushumei + '\n');
-			}
-
-			for (i = 0; i < this.numList.length; i += 2) {
-				e = this.numList[i];
-				if (this.kanjiShown[e]) {
-					j = entry.misc[e];
-					b.push(this.numList[i + 1].replace('&amp;', '&') + '\t' + (j ? j : '-') + '\n');
-				}
-			}
-		}
-		else {
-			if (max > entry.data.length) max = entry.data.length;
-			for (i = 0; i < max; ++i) {
-				e = entry.data[i][0].match(/^(.+?)\s+(?:\[(.*?)\])?\s*\/(.+)\//);
-				if (!e) continue;
-
-				if (e[2]) {
-					b.push(e[1] + '\t' + e[2]);
-				}
-				else {
-					b.push(e[1]);
-				}
-
-				t = e[3].replace(/\//g, '; ');
-				if (!rcxConfig.wpos) t = t.replace(/^\([^)]+\)\s*/, '');
-				if (!rcxConfig.wpop) t = t.replace('; (P)', '');
-				b.push('\t' + t + '\n');
-			}
-		}
-		return b.join('');
-	},
-	
 	done: function () {
 		for (var i = this.dicList.length - 1; i >= 0; --i) {
 			try {
