@@ -558,6 +558,12 @@ var rcxData = {
 					pK = '';
 				}
 				b.push(k);
+				
+				// Add pitch accent right after the reading
+				var pitchAccent = rcxMain.getPitchAccent(e[1], e[2]);
+				if(pitchAccent && (pitchAccent.length > 0)){
+					b.push('<span class="w-conj"> ' + pitchAccent + '</span>');
+				}
 
 				if (entry.data[i][1]) b.push(' <span class="w-conj">(' + entry.data[i][1] + ')</span>');
 
