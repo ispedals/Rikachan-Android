@@ -83,6 +83,7 @@ const PREF_ROOT =  "extensions.rikaichanandroid.";
 	//'kindex': 1,
 
 	//pitch
+	'showpitchaccent' : 2,
 	'hidepitchaccentpos' : 2,
 
 	// clipboard / save file
@@ -112,7 +113,8 @@ var rcxConfig={
 
 	'kindex' : 'COMP,H,L,E,DK,N,V,Y,P,IN,I,U', //kanji information, currently not configurable
 	
-	'hidepitchaccentpos': true,
+	'showpitchaccent': true,
+	'hidepitchaccentpos': false,
 
 	// 'sfile': "C:\\Users\\Owner\\Desktop\\save.txt", //hardcoded sfile values for testing
 	//'sfile': "/sdcard/Download/Words.txt",
