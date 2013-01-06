@@ -474,7 +474,11 @@ var rcxMain = {
 		};
 		this.previous_term.position = null;
 		this.tenative_term = {}; //will be used by onmousemove to pass parameters the same way previous_term is used by other functions
-		this.sentence = null; //the setence the currrent word was found in (set in show())
+
+		//sentence extraction globals (set in show())
+		this.sentence = null; //the sentence the currrent word was found in
+		this.word = null // the actual current highlighted word
+		this.sentenceWBlank = null //the sentence the current word was found in replaced with a blank
 		this.enabled = true;
 	},
 
@@ -762,6 +766,18 @@ var rcxMain = {
 		this.tenative_term={};
 		
 		this.lastFound = [e];
+
+		 // Find the highlighted word, rather than the JMDICT lookup
+		this.word = text.substring(0, e.matchLen);
+
+		var wordPosInSentence = rangeOffset + prevSentence.length - sentenceStartPos + startOffset;
+
+		// Add blanks in place of the hilighted word for use with the save feature
+		sentenceWBlank = sentence.substring(0, wordPosInSentence) + "___" 
+					+ sentence.substring(wordPosInSentence + e.matchLen, sentence.length);
+
+		this.sentenceWBlank = sentenceWBlank;
+
 		if (!e.matchLen) e.matchLen = 1;
 		this.previous_term.currentOffsetEnd = e.matchLen;
 		this.previous_term.currentOffset = (rangeOffset - this.previous_term.rangeOffset);
