@@ -719,14 +719,14 @@ var rcxMain = {
 
 			// Form the SQL used to query the pitch accent
 			if(!reading)  {
-				var stPitch = "SELECT pitch FROM Dict WHERE expression='" + expression + "' LIMIT 1";
+				var stPitch = ["SELECT pitch FROM Dict WHERE expression=?1 LIMIT 1", expression];
 			}
 			else {
-				var stPitch ="SELECT pitch FROM Dict WHERE expression='" + expression + "' AND reading='" + reading + " LIMIT 1";
+				var stPitch =["SELECT pitch FROM Dict WHERE expression=?1  AND reading=?2 LIMIT 1", expression, reading];
 			}
 
 			// Get the result of the query
-			var pitch = pitchDB.exec(stPitch)[0].pitch;
+			var pitch = pitchDB.exec.apply(pitchDB, stPitch)[0].pitch;
 
 			pitchDB.close();
 
