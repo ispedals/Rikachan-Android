@@ -154,6 +154,56 @@ var rcxData = {
 		0x3062,0x3065,0x3067,0x3069,0xFF85,0xFF86,0xFF87,0xFF88,0xFF89,0x3070,0x3073,0x3076,0x3079,0x307C],
 	cs:[0x3071,0x3074,0x3077,0x307A,0x307D],
 	
+	convertKatakanaToHiragana: function(word) {
+		var i, u, v, r, p;
+		var trueLen = [0];
+		
+		// half & full-width katakana to hiragana conversion
+		// note: katakana vu is never converted to hiragana
+
+		p = 0;
+		r = '';
+		for (i = 0; i < word.length; ++i) {
+			u = v = word.charCodeAt(i);
+			
+			if (u <= 0x3000) break;
+
+			// full-width katakana to hiragana
+			if ((u >= 0x30A1) && (u <= 0x30F3)) {
+				u -= 0x60;
+			}
+			// half-width katakana to hiragana
+			else if ((u >= 0xFF66) && (u <= 0xFF9D)) {
+				u = this.ch[u - 0xFF66];
+			}
+			// voiced (used in half-width katakana) to hiragana
+			else if (u == 0xFF9E) {
+				if ((p >= 0xFF73) && (p <= 0xFF8E)) {
+					r = r.substr(0, r.length - 1);
+					u = this.cv[p - 0xFF73];
+				}
+			}
+			// semi-voiced (used in half-width katakana) to hiragana
+			else if (u == 0xFF9F) {
+				if ((p >= 0xFF8A) && (p <= 0xFF8E)) {
+					r = r.substr(0, r.length - 1);
+					u = this.cs[p - 0xFF8A];
+				}
+			}
+			// ignore J~
+			else if (u == 0xFF5E) {
+				p = 0;
+				continue;
+			}
+			
+			r += String.fromCharCode(u);
+			trueLen[r.length] = i + 1;	// need to keep real length because of the half-width semi/voiced conversion
+			p = v;
+		}
+				
+		return r;
+	},
+	
 	wordSearch: function(word) {
 		var ds = this.selected;
 		do {
@@ -587,60 +637,80 @@ var rcxData = {
 
 		return b.join('');
 	},
-		
-	makeText: function(entry, max) {
-		var e;
+
+	// entry                      = Contains the work lookup info (kana, kanji, def)
+	// word                      = Highlighted Word
+	// sentence               = The sentence containing the highlighted word
+	// sentenceWBlank = Like sentence except the highlighted word is replaced with blanks
+	// saveKana             = Replace kanji with kana (that is, $d=$r)
+	// url                          = Source URL
+	makeText: function (entry, word, sentence, sentenceWBlank, saveKana, url) {
+		var entryData;
 		var b;
-		var i, j;
+		var i, j, k;
 		var t;
 
-		if (entry == null) return '';
-		if (!this.ready) this.init();
+		if (entry == null || entry.data == null) return '';
 
-		b = [];
+		var saveText = rcxConfig.saveformat;
 
-		if (entry.kanji) {
-			b.push(entry.kanji + '\n');
-			b.push((entry.eigo.length ? entry.eigo : '-') + '\n');
+		// Example of what entry.data[0][0] looks like (linebreak added by me):
+		//   乃 [の] /(prt,uk) indicates possessive/verb and adjective nominalizer (nominaliser)/substituting 
+		//   for "ga" in subordinate phrases/indicates a confident conclusion/emotional emphasis (sentence end) (fem)/(P)/
 
-			b.push(entry.onkun.replace(/\.([^\u3001]+)/g, '\uFF08$1\uFF09') + '\n');
-			if (entry.nanori.length) {
-				b.push('\u540D\u4E57\u308A\t' + entry.nanori + '\n');
-			}
-			if (entry.bushumei.length) {
-				b.push('\u90E8\u9996\u540D\t' + entry.bushumei + '\n');
-			}
+		// Extract needed data from the hilited entry
+		//   entryData[0] = kanji/kana + kana + definition
+		//   entryData[1] = kanji (or kana if no kanji)
+		//   entryData[2] = kana (null if no kanji)
+		//   entryData[3] = definition
 
-			for (i = 0; i < this.numList.length; i += 2) {
-				e = this.numList[i];
-				if (this.kanjiShown[e]) {
-					j = entry.misc[e];
-					b.push(this.numList[i + 1].replace('&amp;', '&') + '\t' + (j ? j : '-') + '\n');
-				}
-			}
+		entryData = entry.data[0][0].match(/^(.+?)\s+(?:\[(.*?)\])?\s*\/(.+)\//);
+
+		var dictForm = entryData[1];
+		var reading = entryData[2];
+
+		// Does the user want to use the reading in place of kanji for the $d token?
+		if (entryData[2] && saveKana) {
+			dictForm = entryData[2];
 		}
-		else {
-			if (max > entry.data.length) max = entry.data.length;
-			for (i = 0; i < max; ++i) {
-				e = entry.data[i][0].match(/^(.+?)\s+(?:\[(.*?)\])?\s*\/(.+)\//);
-				if (!e) continue;
 
-				if (e[2]) {
-					b.push(e[1] + '\t' + e[2]);
-				}
-				else {
-					b.push(e[1]);
-				}
-
-				t = e[3].replace(/\//g, '; ');
-				if (!rcxConfig.wpos) t = t.replace(/^\([^)]+\)\s*/, '');
-				if (!rcxConfig.wpop) t = t.replace('; (P)', '');
-				b.push('\t' + t + '\n');
-			}
+		// Ensure that reading is never blank
+		if (!reading) {
+			reading = dictForm;
 		}
-		return b.join('');
+
+		var ankiTags = rcxConfig.atags.trim();
+
+		var audioFile = reading + ' - ' + dictForm + '.mp3';
+
+		var tranlation = "";
+
+		tranlation = entryData[3].replace(/\//g, "; ");
+
+		// Remove word type indicators? [example: (v1,n)]
+		if (!rcxConfig.wpos) {
+			tranlation = tranlation.replace(/^\([^)]+\)\s*/, '');
+		}
+			// Remove popular indicator? [example: (P)]
+		if (!rcxConfig.wpop) {
+			tranlation = tranlation.replace('; (P)', '');
+		}
+
+		saveText = saveText.replace(/\$g/g, ankiTags); // Anki tags
+		saveText = saveText.replace(/\$a/g, audioFile); // Audio file
+		saveText = saveText.replace(/\$d/g, dictForm); // Dictionary form
+		saveText = saveText.replace(/\$h/g, word); // Highlighted Word
+		saveText = saveText.replace(/\$r/g, reading); // Reading (kana)
+		saveText = saveText.replace(/\$s/g, sentence); // Sentence
+		saveText = saveText.replace(/\$b/g, sentenceWBlank); // Sentence with blank
+		saveText = saveText.replace(/\$u/g, url); // Source URL
+		saveText = saveText.replace(/\$t/g, '\t'); // Tab character
+		saveText = saveText.replace(/\$n/g, tranlation); // Translation/definition
+		saveText += '\n';
+
+		return saveText;
 	},
-	
+
 	done: function () {
 		for (var i = this.dicList.length - 1; i >= 0; --i) {
 			try {

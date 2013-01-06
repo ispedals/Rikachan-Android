@@ -95,6 +95,57 @@ var text_manipulator = {
 		return text;
 	},
 
+	getInlineTextPrev: function (node, selEndList, maxLength) {
+		if ((node.nodeType == Node.TEXT_NODE) && (node.data.length == 0)) {
+			return ''
+		}
+
+		let text = '';
+
+		let result = node.ownerDocument.evaluate('descendant-or-self::text()[not(parent::rp) and not(ancestor::rt)]',
+		node, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+
+		while ((text.length < maxLength) && (node = result.iterateNext())) {
+			if (text.length + node.data.length >= maxLength) {
+				text += node.data.substr(node.data.length - (maxLength - text.length), maxLength - text.length);
+			} else {
+				text += node.data;
+			}
+
+			selEndList.push(node);
+		}
+
+		return text;
+	},
+
+	getPrev: function (node) {
+		do {
+			if (node.previousSibling) {
+				return node.previousSibling;
+			}
+			node = node.parentNode;
+		}
+		while ((node) && (this.inlineNames[node.nodeName]));
+		return null;
+	},
+
+	getTextFromRangePrev: function (rangeParent, offset, selEndList, maxLength) {
+		if (rangeParent.ownerDocument.evaluate('boolean(parent::rp or ancestor::rt)',
+		rangeParent, null, XPathResult.BOOLEAN_TYPE, null).booleanValue) {
+			return '';
+		}
+
+		let text = '';
+		var prevNode = rangeParent;
+
+		while ((text.length < maxLength) && ((prevNode = this.getPrev(prevNode)) != null) && (this.inlineNames[prevNode.nodeName])) {
+			textTemp = text;
+			text = this.getInlineTextPrev(prevNode, selEndList, maxLength - text.length) + textTemp;
+		}
+
+		return text;
+	},
+
 	highlightMatch: function(doc, rp, ro, matchLen, selEndList, tdata) {
 		if (selEndList.length === 0) return;
 
@@ -423,6 +474,11 @@ var rcxMain = {
 		};
 		this.previous_term.position = null;
 		this.tenative_term = {}; //will be used by onmousemove to pass parameters the same way previous_term is used by other functions
+
+		//sentence extraction globals (set in show())
+		this.sentence = null; //the sentence the currrent word was found in
+		this.word = null // the actual current highlighted word
+		this.sentenceWBlank = null //the sentence the current word was found in replaced with a blank
 		this.enabled = true;
 	},
 
@@ -614,7 +670,79 @@ var rcxMain = {
 
 		//selection end data
 		var selEndList = [];
-		var text = text_manipulator.getTextFromRange(rangeParent, rangeOffset, selEndList, 13);
+
+		// The text here will be used to lookup the word
+		var text = text_manipulator.getTextFromRange(rangeParent, rangeOffset, selEndList, 20);
+
+		// The text from the currently selection node + 50 more characters from the next nodes    
+		var sentence = text_manipulator.getTextFromRange(rangeParent, 0, selEndList, rangeParent.data.length + 50);
+
+		// 50 characters from the previous nodes.
+		// The above sentence var will stop at first ruby tag encountered to the 
+		// left because it has a different node type. prevSentence will start where 
+		// the above sentence left off moving to the left and will capture the ruby tags.
+		var prevSentence = text_manipulator.getTextFromRangePrev(rangeParent, 0, selEndList, 50);
+
+		// Combine the full sentence text, including stuff that will be chopped off later.
+		sentence = prevSentence + sentence;
+
+
+		//
+		// Find the sentence in the node
+		//
+
+		// Get the position of the first selected character in the sentence variable
+		var i = rangeOffset + prevSentence.length;
+
+		var sentenceStartPos;
+		var sentenceEndPos;
+
+		// Find the last character of the sentence
+		while (i < sentence.length) {
+			if (sentence[i] == "\u3002" || sentence[i] == "\n" || sentence[i] == "\uFF1F" ||  sentence[i] == "\uFF01") {
+				sentenceEndPos = i;
+				break;
+			} else if (i == (sentence.length - 1)) {
+				sentenceEndPos = i;
+			}
+			i++;
+		}
+
+		i = rangeOffset + prevSentence.length;
+
+
+		// Find the first character of the sentence
+		while (i >= 0) {
+			if (sentence[i] == "\u3002" || sentence[i] == "\n" || sentence[i] == "\uFF1F" || sentence[i] == "\uFF01") {
+				sentenceStartPos = i + 1;
+				break;
+			} else if (i == 0) {
+				sentenceStartPos = i;
+			}
+			i--;
+		}
+
+		// Extract the sentence
+		sentence = sentence.substring(sentenceStartPos, sentenceEndPos + 1);
+
+		var startingWhitespaceMatch = sentence.match(/^\s+/);
+
+		// Strip out control characters
+		sentence = sentence.replace(/[\n\r\t]/g, '');
+
+		var startOffset = 0;
+
+		// Adjust offset of selected word according to the number of
+		// whitespace chars at the beginning of the sentence
+		if (startingWhitespaceMatch) {
+			startOffset -= startingWhitespaceMatch[0].length;
+		}
+
+		// Trim
+		sentence = sentence.trim();
+
+		this.sentence = sentence;
+
 		if (text.length == 0) {
 			this.clearView();
 			return false;
@@ -638,6 +766,18 @@ var rcxMain = {
 		this.tenative_term={};
 		
 		this.lastFound = [e];
+
+		 // Find the highlighted word, rather than the JMDICT lookup
+		this.word = text.substring(0, e.matchLen);
+
+		var wordPosInSentence = rangeOffset + prevSentence.length - sentenceStartPos + startOffset;
+
+		// Add blanks in place of the hilighted word for use with the save feature
+		sentenceWBlank = sentence.substring(0, wordPosInSentence) + "___" 
+					+ sentence.substring(wordPosInSentence + e.matchLen, sentence.length);
+
+		this.sentenceWBlank = sentenceWBlank;
+
 		if (!e.matchLen) e.matchLen = 1;
 		this.previous_term.currentOffsetEnd = e.matchLen;
 		this.previous_term.currentOffset = (rangeOffset - this.previous_term.rangeOffset);
@@ -747,35 +887,23 @@ var rcxMain = {
 	},
 
 	savePrep: function (clip) {
-		var me, mk;
 		var text;
 		var i;
 		var f;
 		var e;
+		var s;
+		var w;
+		var sWBlank;
 
 		f = this.lastFound;
+		s = this.sentence;
+		sWBlank = this.sentenceWBlank;
+		w = this.word;
+
 		if ((!f) || (f.length == 0)) return null;
 
-		if (clip) {
-			me = rcxConfig.smaxce;
-			mk = rcxConfig.smaxck;
-		} else {
-			me = rcxConfig.smaxfe;
-			mk = rcxConfig.smaxfk;
-		}
-
-		text = '';
-		for (i = 0; i < f.length; ++i) {
-			e = f[i];
-			if (e.kanji) {
-				if (mk-- <= 0) continue
-				text += rcxData.makeText(e, 1);
-			} else {
-				if (me <= 0) continue;
-				text += rcxData.makeText(e, me);
-				me -= e.data.length;
-			}
-		}
+		e = f[0];
+		text = rcxData.makeText(e, w, s, sWBlank, false, this.current_document.location.href);
 
 		if (rcxConfig.snlf == 1) text = text.replace(/\n/g, '\r\n');
 
