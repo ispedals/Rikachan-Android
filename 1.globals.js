@@ -5,14 +5,14 @@
 	Edits by Balloonguy
 
 	---
-	
+
 	Rikaisama
 	Author:  Christopher Brochtrup
 	Contact: cb4960@gmail.com
 	Website: http://rikaisama.sourceforge.net/
 
 	---
-	
+
 	Rikaichan
 	Copyright (C) 2005-2012 Jonathan Zarate
 	http://www.polarcloud.com/

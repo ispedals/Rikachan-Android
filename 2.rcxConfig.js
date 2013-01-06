@@ -12,12 +12,12 @@ function PrefListener(branch_name, callback) {
   this._branch.QueryInterface(Ci.nsIPrefBranch2);
   this._callback = callback;
 }
- 
+
 PrefListener.prototype.observe = function(subject, topic, data) {
   if (topic == 'nsPref:changed')
     this._callback(this._branch, data);
 };
- 
+
 /**
  * @param {boolean=} trigger if true triggers the registered function
  *   on registration, that is, when this method is called.
@@ -31,7 +31,7 @@ PrefListener.prototype.register = function(trigger) {
         { that._callback(that._branch, pref_leaf_name); });
   }
 };
- 
+
 PrefListener.prototype.unregister = function() {
   if (this._branch)
     this._branch.removeObserver('', this);
@@ -62,7 +62,7 @@ function setPref(branch, key, value, type) {
 		branch.setBoolPref(key, value);
 		return;
 	}
-}		
+}
 
 const PREF_ROOT =  "extensions.rikaichanandroid.";
 
@@ -73,12 +73,12 @@ const PREF_ROOT =  "extensions.rikaichanandroid.";
 	//css: 1,
 
 	// dictionary
-	'wpos': 2,					
+	'wpos': 2,
 	'wpop': 2,
 	'wmax': 0,
 	'namax': 0,
 	'hidex': 2,
-	
+
 	// kanji
 	//'kindex': 1,
 
@@ -101,11 +101,11 @@ const PREF_ROOT =  "extensions.rikaichanandroid.";
 	//Rikaisama formatted save
 	'saveformat': 1,
 	'atags': 1,
-	
+
 	// not in GUI
 	'popdelay': 0,
 	'hidedef': 2,
-	// 'sticky': 2 
+	// 'sticky': 2
 };
 
 var rcxConfig={
@@ -116,7 +116,7 @@ var rcxConfig={
 	'hidex': false,
 
 	'kindex' : 'COMP,H,L,E,DK,N,V,Y,P,IN,I,U', //kanji information, currently not configurable
-	
+
 	'showpitchaccent': true,
 	'hidepitchaccentpos': false,
 
@@ -138,9 +138,9 @@ var rcxConfig={
 	'popdelay': 50,
 	'hidedef': false,
 	'sticky': true,
-	
+
 	//overide some properties depending on user set preferences, note that not all properties are exposed as preferences (see rcxConfigList)
-	load: function () { 
+	load: function () {
 		var branch = Services.prefs.getBranch(PREF_ROOT);
 		for(let [key, type] in Iterator(rcxConfigList)) {
 			if(branch.prefHasUserValue(key)){

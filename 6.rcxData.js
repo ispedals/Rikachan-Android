@@ -4,7 +4,7 @@ var rcxData = {
 	kanjiShown: null,
 	radData: null, //rad.dat data
 	selected: 0, //selected dictionary index in dicList
-	
+
 	init: function () {
 		this.dicList.push(new RcxDic({
 			name : 'jpen.sqlite',
@@ -27,20 +27,20 @@ var rcxData = {
 			close: function (){}
 		});
 		//the kanji dictionary must always be the last element in dictList
-		
+
 		for(var i=0; i<this.dicList.length; i++) { this.dicList[i].open();}
-		
+
 		this.kanjiShown = {};
 		var a = rcxConfig.kindex.split(',');
 		for (i = a.length - 1; i >= 0; --i) {
 			this.kanjiShown[a[i]] = 1;
 		}
 	},
-	
+
 	select: function (index) {
 		this.selected = index;
 	},
-	
+
 	numList: [
 /*
 		'C', 	'Classical Radical',
@@ -153,11 +153,11 @@ var rcxData = {
 	cv:[0x30F4,0xFF74,0xFF75,0x304C,0x304E,0x3050,0x3052,0x3054,0x3056,0x3058,0x305A,0x305C,0x305E,0x3060,
 		0x3062,0x3065,0x3067,0x3069,0xFF85,0xFF86,0xFF87,0xFF88,0xFF89,0x3070,0x3073,0x3076,0x3079,0x307C],
 	cs:[0x3071,0x3074,0x3077,0x307A,0x307D],
-	
+
 	convertKatakanaToHiragana: function(word) {
 		var i, u, v, r, p;
 		var trueLen = [0];
-		
+
 		// half & full-width katakana to hiragana conversion
 		// note: katakana vu is never converted to hiragana
 
@@ -165,7 +165,7 @@ var rcxData = {
 		r = '';
 		for (i = 0; i < word.length; ++i) {
 			u = v = word.charCodeAt(i);
-			
+
 			if (u <= 0x3000) break;
 
 			// full-width katakana to hiragana
@@ -195,15 +195,15 @@ var rcxData = {
 				p = 0;
 				continue;
 			}
-			
+
 			r += String.fromCharCode(u);
 			trueLen[r.length] = i + 1;	// need to keep real length because of the half-width semi/voiced conversion
 			p = v;
 		}
-				
+
 		return r;
 	},
-	
+
 	wordSearch: function(word) {
 		var ds = this.selected;
 		do {
@@ -218,7 +218,7 @@ var rcxData = {
 			ds = (ds + 1) % this.dicList.length;
 		} while (ds != this.selected);
 	},
-	
+
 	_wordSearch: function(word, dic, max) {
 		// half & full-width katakana to hiragana conversion
 		// note: katakana vu is never converted to hiragana
@@ -344,7 +344,7 @@ var rcxData = {
 		result.matchLen = maxLen;
 		return result;
 	},
-	
+
 	translate: function(text) {
 		var result = { data: [], textLen: text.length };
 		while (text.length > 0) {
@@ -374,7 +374,7 @@ var rcxData = {
 		result.textLen -= text.length;
 		return result;
 	},
-	
+
 	kanjiSearch: function(kanji) {
 		var hex = '0123456789ABCDEF';
 		var kde;
@@ -416,7 +416,7 @@ var rcxData = {
 
 		return result;
 	},
-	
+
 	find: function(data, text) {
 		var tlen = text.length;
 		var beg = 0;
@@ -436,7 +436,7 @@ var rcxData = {
 		}
 		return null;
 	},
-	
+
 	makeHtml: function(entry) {
 		var e;
 		var b;
@@ -584,7 +584,7 @@ var rcxData = {
 				if (!e) continue;
 
 				var k;
-				
+
 				/*
 					e[1] = kanji/kana
 					e[2] = kana
@@ -608,7 +608,7 @@ var rcxData = {
 					pK = '';
 				}
 				b.push(k);
-				
+
 				// Add pitch accent right after the reading
 				if (rcxConfig.showpitchaccent) {
 					var pitchAccent = rcxMain.getPitchAccent(e[1], e[2]);
@@ -655,7 +655,7 @@ var rcxData = {
 		var saveText = rcxConfig.saveformat;
 
 		// Example of what entry.data[0][0] looks like (linebreak added by me):
-		//   乃 [の] /(prt,uk) indicates possessive/verb and adjective nominalizer (nominaliser)/substituting 
+		//   乃 [の] /(prt,uk) indicates possessive/verb and adjective nominalizer (nominaliser)/substituting
 		//   for "ga" in subordinate phrases/indicates a confident conclusion/emotional emphasis (sentence end) (fem)/(P)/
 
 		// Extract needed data from the hilited entry

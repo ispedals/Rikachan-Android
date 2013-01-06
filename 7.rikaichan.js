@@ -180,7 +180,7 @@ var text_manipulator = {
 		return sel.toString();
 	}
 };
-// rcxMain, on enable, initializes its properties. Prior to enable(), both rcxMain.popup_window.getBrowser() must be assigned a function and rcxMain.current_document must be 
+// rcxMain, on enable, initializes its properties. Prior to enable(), both rcxMain.popup_window.getBrowser() must be assigned a function and rcxMain.current_document must be
 // assigned a getter (using Object.defineProperty). A tap results in an event that can be used to determine what text node was tapped.
 // It then uses Rikaichan's logic to determine if the text node contains a Japanese word, finds its definition using rcxData, and displays the definitions using popup_window
 // the last sucessful term is stored in previous_term
@@ -192,14 +192,14 @@ var text_manipulator = {
 // use by calling rcxMain.enable()
 var rcxMain = {
 	current_document: null, //reference to the DOM document; this must be assigned as a getter prior to enable()
-	
+
 	enabled: false,
 
 	// popup_window manages the actual DOM popup element
 	// show() creates the element and attaches it to the given DOM document
 	// destroy() removes the element
 	// getBrowser() must be redefined as a function that returns a chrome browser prior to rcxMain.enable()
-	// 
+	//
 	// The popup element differs from RIkaichan's element by having five buttons on the corners. These buttons are:
 	// move to the preceeding character, move to the next word, save to file, alternative view, and copy to clipboard.
 	// These actions are trigged by a mousedown listener bound to the popup element (handle)  that will call the appropriate functions
@@ -245,7 +245,7 @@ var rcxMain = {
 			// font, if the web page uses a Japanese code page as opposed to Unicode.
 			// This makes it unreadable.
 			popup.setAttribute('lang', 'en');
-			
+
 			popup.style.maxWidth = ('600px');
 
 			if (topdoc.contentType == 'text/plain') {
@@ -363,9 +363,9 @@ var rcxMain = {
 			popup.style.left = (x + content.scrollX) + 'px';
 			popup.style.top = (y + content.scrollY) + 'px';
 			popup.style.display = '';
-			
+
 			var tools = topdoc.createElement('div');
-			
+
 			var previous = topdoc.createElement('a');
 			previous.innerHTML = '\u21E6';
 			previous.id = 'rikai-previous';
@@ -373,7 +373,7 @@ var rcxMain = {
 			previous.style.cssFloat = 'left';
 			previous.style.fontSize="40px";
 			tools.appendChild(previous);
-			
+
 			var next = topdoc.createElement('a');
 			next.innerHTML = '\u21E8';
 			next.id = 'rikai-next';
@@ -381,7 +381,7 @@ var rcxMain = {
 			next.style.cssFloat = 'left';
 			next.style.fontSize="40px";
 			tools.appendChild(next);
-			
+
 			var save = topdoc.createElement('a');
 			save.innerHTML = '\uD83D\uDCBE';
 			save.id = 'rikai-save';
@@ -389,13 +389,13 @@ var rcxMain = {
 			save.style.cssFloat = 'right';
 			save.style.fontSize="x-large";
 			tools.appendChild(save);
-			
+
 			popup.insertBefore(tools, popup.firstChild);
-			
+
 			var br = topdoc.createElement('br');
 			br.style.clear='both';
 			popup.insertBefore(br, tools.nextSibling);
-			
+
 			var alt = topdoc.createElement('a');
 			alt.innerHTML = '\u2747';
 			alt.id = 'rikai-alt';
@@ -403,7 +403,7 @@ var rcxMain = {
 			alt.style.cssFloat = 'left';
 			alt.style.fontSize="xx-large";
 			popup.appendChild(alt);
-			
+
 			var copy = topdoc.createElement('a');
 			copy.innerHTML = '\u2702';
 			copy.id = 'rikai-copy';
@@ -417,9 +417,9 @@ var rcxMain = {
 			this.listener = this.handle.bind(this);
 			popup.addEventListener('click', this.listener, false);
 		},
-		
-		//handles 
-		handle: function (e) { 
+
+		//handles
+		handle: function (e) {
 			e.stopPropagation();
 			switch(e.target.id) {
 				case 'rikai-save':
@@ -464,7 +464,7 @@ var rcxMain = {
 				pageY: null
 			},
 			timer: null, //ID of timer that delays showing of popup (probably want to make rcxMain track this)
-			title: null, //text of DOM node attribute if that is what the term is		
+			title: null, //text of DOM node attribute if that is what the term is
 			rangeNode: null,
 			rangeOffset: null,
 			currentOffset: 0, //uofs
@@ -504,11 +504,11 @@ var rcxMain = {
 	onMouseMove: function (ev) {
 		rcxMain._onMouseMove(ev);
 	},
-	
+
 	_onMouseMove: function (event) {
 		var rangeParent = event.rangeParent;
 		var rangeOffset = event.rangeOffset;
-		
+
 		// if it is the same text
 		if (event.target == this.previous_term.target) {
 			if (this.previous_term.title) return;
@@ -516,7 +516,7 @@ var rcxMain = {
 		}
 
 		if (event.button != 0) return;
-		
+
 		// hitting the popup_window element
 		if(event.target.id.indexOf('rikai') == 0) return;
 
@@ -549,7 +549,7 @@ var rcxMain = {
 				this.clearView();
 			}
 		}
-		
+
 		this.tenative_term.target = event.target;
 		this.tenative_term.rangeNode = rangeParent;
 		this.tenative_term.rangeOffset = rangeOffset;
@@ -610,7 +610,7 @@ var rcxMain = {
 			this.clearView();
 			return;
 		}
-		
+
 		// tenative_term was a new valid term, set previous_term to it
 		if(!usePrevious) {
 			this.previous_term.target = this.tenative_term.target;
@@ -621,7 +621,7 @@ var rcxMain = {
 			this.previous_term.position = this.tenative_term.position;
 			this.previous_term.timer = this.tenative_term.timer;
 		}
-		
+
 		this.tenative_term={};
 		e.title = title.substr(0, e.textLen).replace(/[\x00-\xff]/g, function (c) {
 			return '&#' + c.charCodeAt(0) + ';';
@@ -650,7 +650,7 @@ var rcxMain = {
 
 		//current node is invalid
 		if (!rangeParent) {
-			this.clearView();			
+			this.clearView();
 			return true;
 		}
 
@@ -674,12 +674,12 @@ var rcxMain = {
 		// The text here will be used to lookup the word
 		var text = text_manipulator.getTextFromRange(rangeParent, rangeOffset, selEndList, 20);
 
-		// The text from the currently selection node + 50 more characters from the next nodes    
+		// The text from the currently selection node + 50 more characters from the next nodes
 		var sentence = text_manipulator.getTextFromRange(rangeParent, 0, selEndList, rangeParent.data.length + 50);
 
 		// 50 characters from the previous nodes.
-		// The above sentence var will stop at first ruby tag encountered to the 
-		// left because it has a different node type. prevSentence will start where 
+		// The above sentence var will stop at first ruby tag encountered to the
+		// left because it has a different node type. prevSentence will start where
 		// the above sentence left off moving to the left and will capture the ruby tags.
 		var prevSentence = text_manipulator.getTextFromRangePrev(rangeParent, 0, selEndList, 50);
 
@@ -752,7 +752,7 @@ var rcxMain = {
 			this.clearView();
 			return false;
 		}
-		
+
 		// tenative_term contained a valid term, set previous_term to it
 		if(!usePrevious) {
 			this.previous_term.target = this.tenative_term.target;
@@ -764,7 +764,7 @@ var rcxMain = {
 			this.previous_term.timer = this.tenative_term.timer;
 		}
 		this.tenative_term={};
-		
+
 		this.lastFound = [e];
 
 		 // Find the highlighted word, rather than the JMDICT lookup
@@ -773,7 +773,7 @@ var rcxMain = {
 		var wordPosInSentence = rangeOffset + prevSentence.length - sentenceStartPos + startOffset;
 
 		// Add blanks in place of the hilighted word for use with the save feature
-		sentenceWBlank = sentence.substring(0, wordPosInSentence) + "___" 
+		sentenceWBlank = sentence.substring(0, wordPosInSentence) + "___"
 					+ sentence.substring(wordPosInSentence + e.matchLen, sentence.length);
 
 		this.sentenceWBlank = sentenceWBlank;
@@ -804,7 +804,7 @@ var rcxMain = {
 			}
 		}
 	},
-	
+
 	moveToNextWord: function () {
 		for (var i = 50; i > 0; --i) {
 			this.previous_term.currentOffset += this.previous_term.currentOffsetEnd;
@@ -812,7 +812,7 @@ var rcxMain = {
 			if (this.show(true)) break;
 		}
 	},
-	
+
 	//changes altView
 	move: function () {
 		this.popup_window.altView = (this.popup_window.altView + 1) % 3;

@@ -12,20 +12,20 @@ function watchTab(aEvent) {
 
 var state_manager = {
 	toggle: function (window) {
-		if(rcxMain.enabled) { 
-			showToast(window, "Rikaichan disabled");			
+		if(rcxMain.enabled) {
+			showToast(window, "Rikaichan disabled");
 			this.disable(window);
 		}
 		else {
 			this.init(window);
 		}
-	}, 
-	
+	},
+
 	//called when the browser changes
 	_init: function (browser) {
 		browser.addEventListener('mousemove', rcxMain.onMouseMove, false);
 	},
-	
+
 	//for native UI
 	init: function (window) {
 		var aWindow = window;
@@ -36,7 +36,7 @@ var state_manager = {
 		showToast(window, "Rikaichan enabled");
 		aWindow.BrowserApp.deck.addEventListener("TabSelect", watchTab, false);
 	},
-	
+
 	desktop_init: function (window) {
 		var aWindow = window;
 		var browser = aWindow.gBrowser.mCurrentBrowser;
@@ -54,16 +54,16 @@ var state_manager = {
 		aWindow.BrowserApp.deck.removeEventListener("TabSelect", watchTab, false);
 		aWindow.BrowserApp.selectedBrowser.removeEventListener('mousemove', rcxMain.onMouseMove, false);
 	}
-	
+
 };
 
 function loadIntoWindow(window) {
 	if (!window)
 		return;
-	
+
 	if(isNativeUI()){
 		gRikaichanMenuId = window.NativeWindow.menu.add("Rikaichan", null, function() { state_manager.toggle(window); });
-		log = function (message) { 
+		log = function (message) {
 			showToast(window, message);
 		}
 	}
@@ -97,10 +97,10 @@ var windowListener = {
       loadIntoWindow(domWindow);
     }, false);
   },
-  
+
   onCloseWindow: function(aWindow) {
   },
-  
+
   onWindowTitleChange: function(aWindow, aTitle) {
   }
 };
