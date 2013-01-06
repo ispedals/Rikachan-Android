@@ -629,7 +629,80 @@ var rcxData = {
 
 		return b.join('');
 	},
-		
+
+	// entry                      = Contains the work lookup info (kana, kanji, def)
+	// word                      = Highlighted Word
+	// sentence               = The sentence containing the highlighted word
+	// sentenceWBlank = Like sentence except the highlighted word is replaced with blanks
+	// saveKana             = Replace kanji with kana (that is, $d=$r)
+	// url                          = Source URL
+	_makeText: function (entry, word, sentence, sentenceWBlank, saveKana, url) {
+		var entryData;
+		var b;
+		var i, j, k;
+		var t;
+
+		if (entry == null || entry.data == null) return '';
+
+		var saveText = rcxConfig.saveformat;
+
+		// Example of what entry.data[0][0] looks like (linebreak added by me):
+		//   乃 [の] /(prt,uk) indicates possessive/verb and adjective nominalizer (nominaliser)/substituting 
+		//   for "ga" in subordinate phrases/indicates a confident conclusion/emotional emphasis (sentence end) (fem)/(P)/
+
+		// Extract needed data from the hilited entry
+		//   entryData[0] = kanji/kana + kana + definition
+		//   entryData[1] = kanji (or kana if no kanji)
+		//   entryData[2] = kana (null if no kanji)
+		//   entryData[3] = definition
+
+		entryData = entry.data[0][0].match(/^(.+?)\s+(?:\[(.*?)\])?\s*\/(.+)\//);
+
+		var dictForm = entryData[1];
+		var reading = entryData[2];
+
+		// Does the user want to use the reading in place of kanji for the $d token?
+		if (entryData[2] && saveKana) {
+			dictForm = entryData[2];
+		}
+
+		// Ensure that reading is never blank
+		if (!reading) {
+			reading = dictForm;
+		}
+
+		var ankiTags = rcxConfig.atags.trim();
+
+		var audioFile = reading + ' - ' + dictForm + '.mp3';
+
+		var tranlation = "";
+
+		tranlation = entryData[3].replace(/\//g, "; ");
+
+		// Remove word type indicators? [example: (v1,n)]
+		if (!rcxConfig.wpos) {
+			tranlation = tranlation.replace(/^\([^)]+\)\s*/, '');
+		}
+			// Remove popular indicator? [example: (P)]
+		if (!rcxConfig.wpop) {
+			tranlation = tranlation.replace('; (P)', '');
+		}
+
+		saveText = saveText.replace(/\$g/g, ankiTags); // Anki tags
+		saveText = saveText.replace(/\$a/g, audioFile); // Audio file
+		saveText = saveText.replace(/\$d/g, dictForm); // Dictionary form
+		saveText = saveText.replace(/\$h/g, word); // Highlighted Word
+		saveText = saveText.replace(/\$r/g, reading); // Reading (kana)
+		saveText = saveText.replace(/\$s/g, sentence); // Sentence
+		saveText = saveText.replace(/\$b/g, sentenceWBlank); // Sentence with blank
+		saveText = saveText.replace(/\$u/g, url); // Source URL
+		saveText = saveText.replace(/\$t/g, '\t'); // Tab character
+		saveText = saveText.replace(/\$n/g, tranlation); // Translation/definition
+		saveText += '\n';
+
+		return saveText;
+	},
+
 	makeText: function(entry, max) {
 		var e;
 		var b;
