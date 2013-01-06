@@ -93,6 +93,10 @@ const PREF_ROOT =  "extensions.rikaichanandroid.";
 	'smaxck': 0,
 	'snlf': 0,
 	'ssep': 1,
+
+	//Rikaisama formatted save
+	'saveformat': 1,
+	'atags': 1,
 	
 	// not in GUI
 	'popdelay': 0,
@@ -120,6 +124,9 @@ var rcxConfig={
 	'smaxck': 1,
 	'snlf': 1,
 	'ssep': 'Tab',
+
+	'saveformat': '$d$t$r$t$n'
+	'atags': '',
 
 	'popdelay': 50,
 	'hidedef': false,
