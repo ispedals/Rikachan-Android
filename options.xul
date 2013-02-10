@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+ 
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <setting type="bool" pref="extensions.rikaichanandroid.wpos" title="Show Part of Speech" desc="" />
+  <setting type="bool" pref="extensions.rikaichanandroid.wpop" title="Show Popular Indicator" desc="" />
+  <setting type="integer" pref="extensions.rikaichanandroid.wmax" title="Maximum entries" desc="" />
+  <setting type="integer" pref="extensions.rikaichanandroid.namax" title="Maximum names" desc="" />
+  <setting type="bool" pref="extensions.rikaichanandroid.hidex" title="Hide X rated" desc="" />
+  
+  <setting type="bool" pref="extensions.rikaichanandroid.showpitchaccent" title="Show Pitch Accent" desc="" />
+  <setting type="bool" pref="extensions.rikaichanandroid.hidepitchaccentpos" title="Hide Pitch Accent Part of Speech" desc="" />
+  
+  <setting type="string" pref="extensions.rikaichanandroid.sfile" title="Filename to save to" desc="Example: /sdcard/Download/Words.txt" />
+  <setting type="string" pref="extensions.rikaichanandroid.saveformat" title="Save Format">
+	Available save format tokens
+	Audio file: $a
+	Dictionary form: $d
+	Highlighted word: $h
+	Reading: $r
+	Sentence: $s
+	Sentence with blank: $b
+	Source URL: $u
+	Tab character: $t
+	Tags: $g
+	Translation: $n
+  </setting>
+  <setting type="string" pref="extensions.rikaichanandroid.atags" title="Tags" desc="(separated by spaces)" />
+  <!--
+  <setting type="string" pref="extensions.rikaichanandroid.sfcs" title="Encoding" desc="" />
+  <setting type="bool" pref="extensions.rikaichanandroid.ubom" title="Add BOM" desc="" />
+
+  <setting type="integer" pref="extensions.rikaichanandroid.smaxfe" title="Maximum entries to save" desc="" />
+  <setting type="integer" pref="extensions.rikaichanandroid.smaxfk" title="Maximum kanji entries to save" desc="" />
+  <setting type="integer" pref="extensions.rikaichanandroid.smaxce" title="Maximum entries to copy" desc="" />
+  <setting type="integer" pref="extensions.rikaichanandroid.smaxck" title="Maximum kanji entries to copy" desc="" />
+    -->
+  <setting type="boolint" pref="extensions.rikaichanandroid.snlf" title="Use Windows newlines" desc="" on="1" off="0" />
+  <setting type="string" pref="extensions.rikaichanandroid.ssep" title="Separator" desc="Valid values are: Tab, Comma, or Space (type in, case-sensative) "/>
+
+  <setting type="integer" pref="extensions.rikaichanandroid.popdelay" title="Popup Delay" desc="" />
+  <setting type="bool" pref="extensions.rikaichanandroid.hidedef" title="Hide Definition" desc="" />
+  <!--
+  <setting type="bool" pref="extensions.rikaichanandroid.sticky" title="Sticky" desc="" /> -->
+</vbox>
