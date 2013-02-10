@@ -27,3 +27,12 @@
 // statement=null;
 // }
 // c.db.close();
+
+	window.addEventListener("mousemove", {
+		handleEvent: function(aEvt) {
+			var rangeParent = aEvt.rangeParent;
+			var rangeOffset = aEvt.rangeOffset;
+			var text = rangeParent.data.substr(rangeOffset, 5);
+			document.getElementById('details').innerHTML=text;
+		}
+	}, true);
