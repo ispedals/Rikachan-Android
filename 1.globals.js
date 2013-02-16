@@ -3,6 +3,7 @@
 	Rikaichan Android
 	Based on Rikaichan 2.0.7
 	Edits by Balloonguy
+	Uses public domain code from The Mozilla Developer Network  <https://developer.mozilla.org>
 
 	---
 
