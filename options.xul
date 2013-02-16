@@ -39,6 +39,7 @@
 
   <setting type="integer" pref="extensions.rikaichanandroid.popdelay" title="Popup Delay" desc="" />
   <setting type="bool" pref="extensions.rikaichanandroid.hidedef" title="Hide Definition" desc="" />
-  <!--
-  <setting type="bool" pref="extensions.rikaichanandroid.sticky" title="Sticky" desc="" /> -->
+
+  <setting type="bool" pref="extensions.rikaichanandroid.sticky" title="Sticky" desc="Popup will not disappear unless the popup itself is clicked, or another word is selected" /> 
+  
 </vbox>

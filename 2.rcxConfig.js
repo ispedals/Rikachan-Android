@@ -106,7 +106,7 @@ const PREF_ROOT =  "extensions.rikaichanandroid.";
 	// not in GUI
 	'popdelay': 0,
 	'hidedef': 2,
-	// 'sticky': 2
+	'sticky': 2
 };
 
 var rcxConfig={

@@ -9,6 +9,17 @@ use File::Copy;
 
 my $arg = shift @ARGV || '';
 
+if( $arg =~ /HELP/i) {
+	print <<'EOF';
+perl build.pl [options]
+
+Cleans build directory and create xpi without names dictionary
+
+Additional Options:
+name: creates xpi with names dictionary
+install: pushes created xpi to device
+clean: deletes build directory and xpi's
+
 say 'cleaning';	
 remove_tree('build');
 say 'removed build directory';

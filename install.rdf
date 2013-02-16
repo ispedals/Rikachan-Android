@@ -5,7 +5,7 @@
 		<em:id>Rikaichan.android@nowhere.us</em:id>
 		<em:type>2</em:type>
 		<em:name>Rikaichan Android</em:name>
-		<em:version>2.0</em:version>
+		<em:version>3.0</em:version>
 		<em:bootstrap>true</em:bootstrap>
 		<em:description>Rikaichan for Android</em:description>
 		<em:creator>Balloonguy</em:creator>
@@ -24,7 +24,7 @@
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> 
 				<em:minVersion>17.0</em:minVersion>
-				<em:maxVersion>20.0a1</em:maxVersion>
+				<em:maxVersion>22.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 
@@ -33,7 +33,7 @@
 			<Description>
 				<em:id>{aa3c5121-dab2-40e2-81ca-7ea25febc110}</em:id>
 				<em:minVersion>17.0</em:minVersion>
-				<em:maxVersion>18.*</em:maxVersion>
+				<em:maxVersion>22.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 
