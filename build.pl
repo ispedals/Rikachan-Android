@@ -19,6 +19,8 @@ Additional Options:
 name: creates xpi with names dictionary
 install: pushes created xpi to device
 clean: deletes build directory and xpi's
+EOF
+}
 
 say 'cleaning';	
 remove_tree('build');
@@ -41,7 +43,7 @@ copy('etc/kanji-copyright.txt', 'build/kanji-copyright.txt');
 copy('etc/kanji.dat', 'build/kanji.dat');
 copy('etc/license.txt', 'build/license.txt');
 copy('etc/popup-blue.css', 'build/popup-blue.css');
-copy('etc/radicals.dat', 'build/popup-blue.css');
+copy('etc/radicals.dat', 'build/radicals.dat');
 
 copy('install.rdf', 'build/install.rdf');
 copy('options.xul', 'build/options.xul');
@@ -76,7 +78,7 @@ $xpi .= '+next';
 
 say "going to call xpi $xpi";
 
-write_file('build/bootstrap.js');
+write_file('build/bootstrap.js', $bootstrap);
 
 my $zip = Archive::Zip->new();
 $zip->addTree('build');

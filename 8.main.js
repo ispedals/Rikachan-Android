@@ -86,7 +86,7 @@ function unloadFromWindow(window) {
 
 
 /**
- * bootstrap.js API from https://developer.mozilla.org/en-US/docs/Extensions/Mobile/Initialization_and_Cleanup
+ * bootstrap.js API from developer.mozilla.org/en-US/docs/Extensions/Mobile/Initialization_and_Cleanup
  */
 var windowListener = {
   onOpenWindow: function(aWindow) {
