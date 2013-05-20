@@ -87,6 +87,6 @@ $zip->writeToFileNamed("$xpi.xpi");
 
 if($arg =~ /INSTALL/i) {
 	say 'installing';
-	system('C:\Users\Owner\Desktop\adt-bundle-windows\sdk\platform-tools\adb', 'push', "$xpi.xpi", '/sdcard/rikai.xpi');
-	system('C:\Users\Owner\Desktop\adt-bundle-windows\sdk\platform-tools\adb', 'shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-c', 'android.intent.category.DEFAULT', '-d', 'file:///mnt/sdcard/rikai.xpi', '-n', 'org.mozilla.firefox/.App');
+	system('adb', 'push', "$xpi.xpi", '/sdcard/rikai.xpi');
+	system('adb', 'shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-c', 'android.intent.category.DEFAULT', '-d', 'file:///mnt/sdcard/rikai.xpi', '-n', 'org.mozilla.firefox/.App');
 }
