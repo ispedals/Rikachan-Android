@@ -9,6 +9,7 @@
 		<em:bootstrap>true</em:bootstrap>
 		<em:description>Rikaichan for Android</em:description>
 		<em:creator>Balloonguy</em:creator>
+		<em:homepageURL>https://github.com/ispedals/Rikachan-Android</em:homepageURL>
 		<em:creator>Christopher Brochtrup (aka cb4960)</em:creator>
 		<em:contributor>Jonathan Zarate</em:contributor>
 		<em:contributor>Todd Rudick</em:contributor>
