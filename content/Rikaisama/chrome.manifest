@@ -1,0 +1,19 @@
+content	rikaichan	jar:chrome/rikaichan.jar!/content/
+content	rikaichan	jar:chrome/rikaichan.jar!/content/ contentaccessible=yes
+locale	rikaichan	en-US	jar:chrome/rikaichan.jar!/locale/en-US/
+skin	rikaichan	classic/1.0	jar:chrome/rikaichan.jar!/skin/classic/
+
+overlay	chrome://browser/content/browser.xul	chrome://rikaichan/content/ff-overlay.xul
+style	chrome://global/content/customizeToolbar.xul	chrome://rikaichan/skin/rikaichan.css
+
+overlay	chrome://messenger/content/messenger.xul	chrome://rikaichan/content/tb-overlay.xul
+style	chrome://messenger/content/messenger.xul	chrome://rikaichan/skin/rikaichan.css
+
+overlay	chrome://messenger/content/messageWindow.xul	chrome://rikaichan/content/tb-overlay.xul
+style	chrome://messenger/content/messageWindow.xul	chrome://rikaichan/skin/rikaichan.css
+
+overlay	chrome://messenger/content/messengercompose/messengercompose.xul	chrome://rikaichan/content/tb-compose-overlay.xul
+style	chrome://messenger/content/messengercompose/messengercompose.xul	chrome://rikaichan/skin/rikaichan.css
+
+overlay chrome://navigator/content/navigator.xul   chrome://rikaichan/content/sm-overlay.xul
+style   chrome://navigator/content/navigator.xul   chrome://rikaichan/skin/rikaichan.css

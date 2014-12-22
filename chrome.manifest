@@ -1,0 +1,5 @@
+content alts content/
+content rikaichan jar:content/Rikaisama/chrome/rikaichan.jar!/content/
+content rikaichan jar:content/Rikaisama/chrome/rikaichan.jar!/content/ contentaccessible=yes
+skin rikaichan classic/1.0 jar:content/Rikaisama/chrome/rikaichan.jar!/skin/classic/
+locale rikaichan en-US jar:content/Rikaisama/chrome/rikaichan.jar!/locale/en-US/

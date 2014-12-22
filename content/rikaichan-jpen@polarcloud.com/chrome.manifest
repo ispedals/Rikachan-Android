@@ -1,0 +1,9 @@
+content	rikaichan-jpen	jar:chrome/rikaichan-jpen.jar!/content/
+
+overlay	chrome://browser/content/browser.xul			chrome://rikaichan-jpen/content/overlay.xul
+
+overlay	chrome://messenger/content/messenger.xul		chrome://rikaichan-jpen/content/overlay.xul
+overlay	chrome://messenger/content/messageWindow.xul	chrome://rikaichan-jpen/content/overlay.xul
+overlay	chrome://messenger/content/messengercompose/messengercompose.xul	chrome://rikaichan-jpen/content/overlay.xul
+
+overlay	chrome://navigator/content/navigator.xul		chrome://rikaichan-jpen/content/overlay.xul
