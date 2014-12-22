@@ -19,6 +19,11 @@ Tapping the popup will cause it to close, but tapping any of these icons will no
 ### Options
 See http://mzl.la/MGnc0n for how to access the options
 
+## Known Issues
+* It is not possible to select a link
+* Tapping near a link causes the link to be pressed instead of the word
+* The popup is not optimized for small screens
+
 ##Development
 To use in Firefox for Desktop, install the addon, debug the addon, and in the console type ```context.rcxMain.toggle()``.
 
