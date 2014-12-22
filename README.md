@@ -2,11 +2,13 @@
 
 This is a port of Rikaisama for Firefox for Android. Not all features are supported.
 
+[Downloads](https://github.com/ispedals/Rikachan-Android/releases); [Forum](http://forum.koohii.com/viewtopic.php?pid=228159)
+
 ## Usage
 From the menu, tap the Rikachan button so that it is checked. A message should appear saying Rikaichan is enabled. When you tap the first character of a word on a webpage, the Rikaichan popup will appear. Tapping on another word or tapping on the popup itself will make it go away. Double tapping, scrolling, and pinching still work and will not cause the current popup to disappear. Rikaichan will be enabled on all tabs. To disable Rikaichan, tap the Rikaichan button from the menu again.
 
 ### Popup window
-Unlike the normal Rikaichan popup, the popup contains five icons:
+Unlike the normal Rikaichan popup, the popup contains four icons:
 
 * ⇦: Tapping this will cause Rikaichan to move one character back. This is useful if, for example, you are looking up the word 理解 and accidentally tap 解 instead of 理. Tapping this arrow will make Rikaichan move a character back and will now correctly look up and display the definition of 理解.
 * ⇨: Tapping this will cause Rikaichan go to the next word if possible. Rikaichan does not try very hard to find the next valid word, so this may not always work.
