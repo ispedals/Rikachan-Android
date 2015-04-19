@@ -166,7 +166,7 @@ function loadIntoWindow(window) {
   context.rcxDicList = {
     "rikaichan-jpen@polarcloud.com" : {
       'name': "Japanese-English",
-      'version': "2.01.141201",
+      'version': "2.01.150401",
       'id': "rikaichan-jpen@polarcloud.com",
       'hasType': true,
       'isName': false
