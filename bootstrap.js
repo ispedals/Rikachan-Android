@@ -69,7 +69,7 @@ function loadIntoWindow(window) {
     Instead of letting Rikaisama have unfettered access to "window", we only
     expose the properties it expects, so that if things change, things will fail
     faster. Doing it this way also causes Rikaisama to fail silently when it
-    attempts to modify the XUL overlay.
+    attempts to modify the XUL overlay, which we want to happen.
     To do this, we load Rikaisama in a sandbox with "context" being the global
     environment.
   */
@@ -110,7 +110,7 @@ function loadIntoWindow(window) {
    'defaultPreferences': {
    },
    /*
-    Default preferences are a file with the preferenceswrapped in a function
+    Default preferences are a file with the preferences wrapped in a function
     like:
       pref(key, val)
     We exploit this fact and define a global function that assigns the
@@ -317,7 +317,7 @@ function loadIntoWindow(window) {
 
   /*
     Rikaisama expects to be able to set the window onload handler to run
-    rcxMain._init. We run this code after load so we call rcxMain._init ourselves
+    rcxMain._init. We run this code after the window has loaded, so we call rcxMain._init ourselves
   */
   context.rcxMain._init();
 
