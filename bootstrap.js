@@ -191,16 +191,16 @@ function loadIntoWindow(window) {
   };
 
   //some default preferences for us
-  context.defaultPreferences['rikaichan.checkversion'] = false;
-  context.defaultPreferences['rikaichan.firsticon'] = false;
-  context.defaultPreferences['rikaichan.minihelp'] = false;
+  context.defaultPreferences['extensions.rikaichan.checkversion'] = false;
+  context.defaultPreferences['extensions.rikaichan.firsticon'] = false;
+  context.defaultPreferences['extensions.rikaichan.minihelp'] = false;
   // rikaichan is active for the entire browser window
-  context.defaultPreferences['rikaichan.enmode'] = 1;
+  context.defaultPreferences['extensions.rikaichan.enmode'] = 1;
   // sticky means that the popup is dismissed on only on dblclick
-  context.defaultPreferences['rikaichan.startsticky'] = true;
+  context.defaultPreferences['extensions.rikaichan.startsticky'] = true;
 
   /*
-    even though we set rikaichan.checkversion to false
+    even though we set extensions.rikaichan.checkversion to false
     this function is still called, so we make it a no-op
   */
   context.rcxMain.checkVersion = function rikaisamaCustomCheckVersion(){};
@@ -217,7 +217,7 @@ function loadIntoWindow(window) {
     }
 
     /*
-      By having rikaichan.startsticky set, and therefore having Rikaisama be in
+      By having extensions.rikaichan.startsticky set, and therefore having Rikaisama be in
       super-sticky mode, the popup is dismissed on double clicks. Touch devices
       can't cause double clicks, so we make clicks act as double clicks
     */

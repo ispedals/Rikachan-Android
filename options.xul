@@ -12,13 +12,17 @@
     Available save format tokens
     Audio file: $a
     Dictionary form: $d
+    Frequency: $f
     Highlighted word: $h
+    Notes: $o
+    Pitch Accent: $p
     Reading: $r
     Sentence: $s
     Sentence with blank: $b
     Source URL: $u
     Tab character: $t
     Tags: $g
+    Title: $i
     Translation: $n
   </setting>
   <setting type="string" pref="rikaichan.atags" title="&ClipSave.AnkiTags;" desc="&ClipSave.AnkiTagsHelp;" />

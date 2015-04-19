@@ -5,13 +5,14 @@
 		<em:id>{697F6AFE-5321-4DE1-BFE6-4471C3721BD4}</em:id>
     <em:type>2</em:type>
 		<em:name>Rikaisama</em:name>
-		<em:version>20.3</em:version>
+		<em:version>22.0</em:version>
 		<em:description>Japanese dictionary extension</em:description>
 		<em:optionsURL>chrome://rikaichan/content/options.xul</em:optionsURL>
 		<em:iconURL>chrome://rikaichan/skin/smile.png</em:iconURL>
 		<em:homepageURL>http://rikaisama.sourceforge.net/</em:homepageURL>
 		<em:creator>Christopher Brochtrup (aka cb4960)</em:creator>
     <em:contributor>Jonathan Zarate (author of Rikaichan)</em:contributor>
+		<em:contributor>Boaz Yaniv (Rikaisama contributor)</em:contributor>
 		<em:contributor>Todd Rudick</em:contributor>
 		<em:contributor>James William Breen</em:contributor>
 		<em:contributor>Electronic Dictionary Research &amp; Development Group</em:contributor>
