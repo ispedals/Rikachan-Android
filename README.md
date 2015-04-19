@@ -27,7 +27,7 @@ See http://mzl.la/MGnc0n for how to access the options
 * The popup is not optimized for small screens
 
 ##Development
-To use in Firefox for Desktop, install the addon, debug the addon, and in the console type ```context.rcxMain.toggle()``.
+To use in Firefox for Desktop, install the addon, debug the addon, and in the console type `context.rcxMain.toggle()`.
 
 ###Notes
 * Update rcxDicList when the dictionary version changes
