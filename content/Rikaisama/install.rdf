@@ -5,7 +5,7 @@
 		<em:id>{697F6AFE-5321-4DE1-BFE6-4471C3721BD4}</em:id>
     <em:type>2</em:type>
 		<em:name>Rikaisama</em:name>
-		<em:version>22.0</em:version>
+		<em:version>22.9.3</em:version>
 		<em:description>Japanese dictionary extension</em:description>
 		<em:optionsURL>chrome://rikaichan/content/options.xul</em:optionsURL>
 		<em:iconURL>chrome://rikaichan/skin/smile.png</em:iconURL>
@@ -13,6 +13,7 @@
 		<em:creator>Christopher Brochtrup (aka cb4960)</em:creator>
     <em:contributor>Jonathan Zarate (author of Rikaichan)</em:contributor>
 		<em:contributor>Boaz Yaniv (Rikaisama contributor)</em:contributor>
+		<em:contributor>Landon Epps (Rikaisama contributor)</em:contributor>
 		<em:contributor>Todd Rudick</em:contributor>
 		<em:contributor>James William Breen</em:contributor>
 		<em:contributor>Electronic Dictionary Research &amp; Development Group</em:contributor>
@@ -28,7 +29,7 @@
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 				<em:minVersion>4.0</em:minVersion>
-				<em:maxVersion>99.*</em:maxVersion>
+				<em:maxVersion>48.0</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 
@@ -37,7 +38,7 @@
 			<Description>
 				<em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
 				<em:minVersion>5.0</em:minVersion>
-				<em:maxVersion>99.*</em:maxVersion>
+				<em:maxVersion>48.0</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 
@@ -46,7 +47,7 @@
 			<Description>
 				<em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
 				<em:minVersion>2.0</em:minVersion>
-				<em:maxVersion>99.*</em:maxVersion>
+				<em:maxVersion>2.45</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 

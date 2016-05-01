@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C), 2000-2007 by the monit project group.
  * All Rights Reserved.
  *

@@ -1,5 +1,5 @@
-/*------------------------------------------------------------------------
---  Copyright (C) 2011-2014 Christopher Brochtrup
+﻿/*------------------------------------------------------------------------
+--  Copyright (C) 2012-2015 Christopher Brochtrup
 --
 --  This file is part of eplkup.
 --
@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <errno.h>
 
 #include "string.h"
 #include "iconv.h"
@@ -159,7 +160,7 @@ char *convert_encoding(char *dest, int max_dest, char *src, int max_src, const c
     return NULL;
   }
 
-  status_conv = iconv(cd, (const char **)&src, &in_left, &out_buf, &out_left);
+  status_conv = iconv(cd, &src, &in_left, &out_buf, &out_left);
 
   if(status_conv == (size_t)-1)
   {

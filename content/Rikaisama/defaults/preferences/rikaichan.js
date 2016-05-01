@@ -79,6 +79,7 @@ pref('extensions.rikaisama.epwingaddcolorandpitch', true);
 pref('extensions.rikaisama.epwingforceparse', false);
 pref('extensions.rikaisama.epwingsearchnextlongest', false);
 pref('extensions.rikaisama.epwingremoveregex', '');
+pref('extensions.rikaisama.epwing_apply_remove_regex_when_saving', true);
 pref('extensions.rikaisama.epwingusewine', false);
 
 pref('extensions.rikaisama.sfile', '');
@@ -101,6 +102,7 @@ pref('extensions.rikaisama.vocabknownwordslistcolumn', 1);
 pref('extensions.rikaisama.vocabtodowordslistfile', '');
 pref('extensions.rikaisama.vocabtodowordslistcolumn', 1);
 
+pref('extensions.rikaisama.rti_save_format', '$d$t$r$t$n');
 pref('extensions.rikaisama.rtifieldnamestext', 'Expression Reading Meaning');
 pref('extensions.rikaisama.rtisaveaudio', false);
 pref('extensions.rikaisama.rtiudpport', 49600);

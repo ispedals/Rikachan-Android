@@ -166,7 +166,7 @@ function loadIntoWindow(window) {
   context.rcxDicList = {
     "rikaichan-jpen@polarcloud.com" : {
       'name': "Japanese-English",
-      'version': "2.01.150401",
+      'version': "2.01.160401",
       'id': "rikaichan-jpen@polarcloud.com",
       'hasType': true,
       'isName': false
@@ -191,13 +191,13 @@ function loadIntoWindow(window) {
   };
 
   //some default preferences for us
-  context.defaultPreferences['extensions.rikaichan.checkversion'] = false;
-  context.defaultPreferences['extensions.rikaichan.firsticon'] = false;
-  context.defaultPreferences['extensions.rikaichan.minihelp'] = false;
+  context.defaultPreferences['extensions.rikaisama.checkversion'] = false;
+  context.defaultPreferences['extensions.rikaisama.firsticon'] = false;
+  context.defaultPreferences['extensions.rikaisama.minihelp'] = false;
   // rikaichan is active for the entire browser window
-  context.defaultPreferences['extensions.rikaichan.enmode'] = 1;
+  context.defaultPreferences['extensions.rikaisama.enmode'] = 1;
   // sticky means that the popup is dismissed on only on dblclick
-  context.defaultPreferences['extensions.rikaichan.startsticky'] = true;
+  context.defaultPreferences['extensions.rikaisama.startsticky'] = true;
 
   /*
     even though we set extensions.rikaichan.checkversion to false

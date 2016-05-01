@@ -1,0 +1,222 @@
+Manifest-Version: 1.0
+
+Name: install.rdf
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Epe9tN5AtmUysZ2zCR5Bew==
+SHA1-Digest: h+SEyBGukrLbg+nOZRYMd/CkoPs=
+
+Name: chrome.manifest
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: /L0pKXijJAPeHnYdy2AUDA==
+SHA1-Digest: +nrZdz70/B2mFu40CtSPaODZXds=
+
+Name: audio/no_audio.mp3
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: N/FU+SDwa7EXZyKqfQ3HGQ==
+SHA1-Digest: Eig6EU17MC1JIuhExupCyCVUa+k=
+
+Name: audio/no_audio_list.txt
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 1B2M2Y8AsgTpgAmY7PhCfg==
+SHA1-Digest: 2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+
+Name: chrome/rikaichan.jar
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: yPGyJ9rDUtTF5XaOXgG4Sg==
+SHA1-Digest: 5laOATicTeaLFwkGUFngT1M185Q=
+
+Name: defaults/preferences/rikaichan.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: +Ohuszu68C6FP/hCGUh4AA==
+SHA1-Digest: A8lObhGnd0erKMx9O4nRNLUU2sA=
+
+Name: epwing/eplkup_source_code/base64.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: SyyOMbTcN4en9LtXolaUng==
+SHA1-Digest: /YzJxAAFWSi2vkshfr1sB4xzQIg=
+
+Name: epwing/eplkup_source_code/base64.h
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 0fvSzGZPyLUpVkplw5JvNQ==
+SHA1-Digest: P/STlytdhwMLfHbV8mQMz+/3DLM=
+
+Name: epwing/eplkup_source_code/eplkup.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: NyXyyJWyOlGYZ1wG/2fszg==
+SHA1-Digest: 84xhN29JcNcjms3nBhD60W2N+7w=
+
+Name: epwing/eplkup_source_code/eplkup_data.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: +Eeh71T9xBOBec6dK8ZNvg==
+SHA1-Digest: ZfRzb0UlwFgNBR0R1lJ3v2nSffY=
+
+Name: epwing/eplkup_source_code/eplkup_data.h
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 8wrs+DUjs6FJDLeztGT5RQ==
+SHA1-Digest: a40NdnGoA00tQhehZgirjnyqQNQ=
+
+Name: epwing/eplkup_source_code/eplkup_font.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: x07+Dn5YJI6Ie+351YlebQ==
+SHA1-Digest: PBUtDsX0U3EFA0RiYfZs1ihKEzc=
+
+Name: epwing/eplkup_source_code/eplkup_font.h
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: ZPyv+ST1xujd/FW+R/odsA==
+SHA1-Digest: lRwKbz4OCNvaBOjnBGQHfFyNjdw=
+
+Name: epwing/eplkup_source_code/eplkup_gaiji.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: He3JHOcDsrNceVpjRtym/Q==
+SHA1-Digest: /LH5Lw5at8OVnfUUYQjKfltovI4=
+
+Name: epwing/eplkup_source_code/eplkup_gaiji.h
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: N1YFdJcVmPHs7cV+Ih32uQ==
+SHA1-Digest: Czoq6siHr8UHxhEOGQVcPvCiiiY=
+
+Name: epwing/eplkup_source_code/eplkup_hook_handler.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: x6BT8WuJcW3SUriFY4BuZw==
+SHA1-Digest: hkIEJ3BmgAfydi/4/BFk8KZoI80=
+
+Name: epwing/eplkup_source_code/eplkup_hook_handler.h
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: jcHPrYY9p0OuMmcxWQq2TQ==
+SHA1-Digest: AnnbWKz1g5UFi++sKES9ZYZovzs=
+
+Name: epwing/eplkup_source_code/eplkup_utils.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: NFjs10bAfoLdxvAxTqH1jQ==
+SHA1-Digest: 6s8lxYC/j7xDeOR2rntCjAgfewg=
+
+Name: epwing/eplkup_source_code/eplkup_utils.h
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: THmyUS0Q1RX6snLAC09VKg==
+SHA1-Digest: FPuMLSJdddIPiPeaus97r8aGDMA=
+
+Name: epwing/eplkup_source_code/gaiji_table_chujiten.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: ZcGY8ThlFAbHB+CvGjbjsA==
+SHA1-Digest: Ybe97JhydVopJqA6LZfa3Hl6CAw=
+
+Name: epwing/eplkup_source_code/gaiji_table_daijirin.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: gACtIn56KrsVH0gGt8keog==
+SHA1-Digest: GT2P/rGhc4hxXzrCuBVXvUGa9DI=
+
+Name: epwing/eplkup_source_code/gaiji_table_daijisen.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: MynnGUAoOV4qv6mxMDdoKg==
+SHA1-Digest: yJ56trNXKvM6o0mh/saz8jsLo1w=
+
+Name: epwing/eplkup_source_code/gaiji_table_genius.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: xjdwVGQmZY9U66ChH2csGA==
+SHA1-Digest: UMvyPAMC83VsuLOt1U0nircHQew=
+
+Name: epwing/eplkup_source_code/gaiji_table_kojien.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: ShTqMw10RjUQqGFulteUFA==
+SHA1-Digest: 07gGKFdAaij7PLIcybfSYZt1skc=
+
+Name: epwing/eplkup_source_code/gaiji_table_meikyojj.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: /h1yZI0nvyeyHrKNwyxMNw==
+SHA1-Digest: 9YK4ii4x6psf8pRdmCC81xvpGMo=
+
+Name: epwing/eplkup_source_code/gaiji_table_meikyou.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: q209JHw2APqAAawlf9cSvw==
+SHA1-Digest: u7UJN3pe2PGVNh99f5Z4tb4Aw5o=
+
+Name: epwing/eplkup_source_code/gaiji_table_snmkg99.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: vG8OoZ6tcdSxcslrBhKvPA==
+SHA1-Digest: 6HltUnqP52N9WcwsIQ45RyTWGqM=
+
+Name: epwing/eplkup_source_code/gaiji_table_wadai5.c
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Lxmwutm7hayVZ0TLh8lItg==
+SHA1-Digest: CqHYZbLaA4tUAhnsbCKpe6PVko8=
+
+Name: epwing/eplkup_source_code/gpl.txt
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 0yI5vLZzRjq4dOgNR/rlBA==
+SHA1-Digest: hiS82uVbru8AzRHV38+mD2hxCgI=
+
+Name: epwing/eplkup_source_code/Makefile
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 6B3rOjUdktaVRyqfeBfehg==
+SHA1-Digest: b6W89ty/yVf52isVHONIHbyhjRU=
+
+Name: epwing/linux/eplkup
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: NfysmQ/8kunzUwhTd8WqUQ==
+SHA1-Digest: Gov5PPAt1Qw//DCDlxWLVkEtXs4=
+
+Name: epwing/linux/readme_linux.txt
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: J5IVyzfTs6U5I6Jl4WgIFA==
+SHA1-Digest: 9BFbT9ggBFgibTQTgWHiWr9BokU=
+
+Name: epwing/osx/eplkup
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Hs3jruPzXkr2XqoXThMBEw==
+SHA1-Digest: db8mzLhIL0SlW6+bROZsro1SQqQ=
+
+Name: epwing/osx/readme_osx.txt
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: Qyl0KACzQMFiPOTL2krTyA==
+SHA1-Digest: r35CqDkhaqTEhNbh7Osztlt4eco=
+
+Name: epwing/windows/eb.dll
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 7gmZodlvm/CHztMXAFG2Xw==
+SHA1-Digest: re5Q3covQYYf/49AdLnwR3HCLu4=
+
+Name: epwing/windows/eplkup.exe
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: fl/KKe//BVWVIeUjavBiow==
+SHA1-Digest: L5D51vsyh04keF+PkRKrETeOKQ4=
+
+Name: epwing/windows/libiconv2.dll
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: /R3GxoApmi7R7tzD6r2mAQ==
+SHA1-Digest: 5wJASIKwMBSr6yrerTip6HrZAEY=
+
+Name: epwing/windows/msvcr71.dll
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: hvGJWujF6LF9meznaKcHMg==
+SHA1-Digest: 1VAqHQB4fWj1SN3uu94eyl4rOMo=
+
+Name: epwing/windows/msvcr90.dll
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 59kdAI/nZCOWK5HEPIjk6w==
+SHA1-Digest: KSaO8M0iCtPF6YEr79P1dZsnomY=
+
+Name: epwing/windows/readme_windows.txt
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 1LJGPc1Q9ZsOtj6QDibXEQ==
+SHA1-Digest: pTDWIls5vEIelv84LVrfcimNfS8=
+
+Name: epwing/windows/run_eplkup.sh
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: KDqJLXlL2c/lHeozM7LYmA==
+SHA1-Digest: MG9SqNSWoqQhLYC7YeWRlfUyreI=
+
+Name: freq/freq.sqlite
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: hPY3yL0NcPmYXxR8SUuSuA==
+SHA1-Digest: 7sSQR5j3aFs43zPWpgd+NfGHAvE=
+
+Name: pitch/pitch_accents.sqlite
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: KpKCX9AxwIV2xu0Cxxxjrg==
+SHA1-Digest: yEIF9KwUAg0dGcwEcIjGk9WaIPo=
+
+Name: license.txt
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 63I7YVOf7vAT3kduaLXFCg==
+SHA1-Digest: tHRW4sHzjEA0b/ANuXaiut82teM=
+

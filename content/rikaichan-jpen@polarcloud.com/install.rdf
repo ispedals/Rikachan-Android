@@ -3,12 +3,11 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>rikaichan-jpen@polarcloud.com</em:id>
 		<em:name>Rikaichan Japanese-English Dictionary File</em:name>
-		<em:version>2.01.150401</em:version>
+		<em:version>2.01.160401</em:version>
 		<em:description>A dictionary file for Rikaichan.</em:description>
 		<em:creator>Jonathan Zarate</em:creator>
 		<em:contributor>JMdict Dictionary - Copyright James William Breen</em:contributor>
 		<em:homepageURL>http://www.polarcloud.com/rikaichan/</em:homepageURL>
-		<em:iconURL>chrome://rikaichan-jpen/content/icon.png</em:iconURL>
 		<em:unpack>true</em:unpack>
 		<em:type>2</em:type>
 

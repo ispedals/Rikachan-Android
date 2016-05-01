@@ -1,4 +1,4 @@
-content	rikaichan-jpen	jar:chrome/rikaichan-jpen.jar!/content/
+content	rikaichan-jpen	chrome/content/
 
 overlay	chrome://browser/content/browser.xul			chrome://rikaichan-jpen/content/overlay.xul
 
