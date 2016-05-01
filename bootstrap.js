@@ -223,7 +223,8 @@ function loadIntoWindow(window) {
     */
     if(!popup.hasListener){
       popup.addEventListener("click", function rikaisamaPopupClick(ev) {
-        ev.currentTarget.dispatchEvent(new Event("dblclick"));
+        context.rcxMain.hidePopup();
+		ev.stopPropagation();
       }, false);
       popup.hasListener = true;
     }
@@ -341,7 +342,7 @@ function unloadFromWindow(window) {
     return;
   }
 
-  context.rcxMain.disable(gBrowser.mCurrentBrowser, 1);
+  context.rcxMain.disable(context.gBrowser.mCurrentBrowser, 1);
 
   if (isNativeUI()) {
     window.NativeWindow.menu.remove(menuIcon);
