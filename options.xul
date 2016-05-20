@@ -3,12 +3,12 @@
  <!DOCTYPE overlay SYSTEM "chrome://rikaichan/locale/options.dtd">
 
  <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <setting type="integer" pref="rikaichan.wmax" title="&Dictionaries.MaxEntries;" desc="" />
-  <setting type="bool" pref="rikaichan.showpitchaccent" title="&Dictionaries.ShowFreq;" desc="" />
-  <setting type="bool" pref="rikaichan.hidepitchaccentpos" title="&Dictionaries.HidePitchAccentPOS;" desc="" />
+  <setting type="integer" pref="extensions.rikaisama.wmax" title="&Dictionaries.MaxEntries;" desc="" />
+  <setting type="bool" pref="extensions.rikaisama.showpitchaccent" title="&Dictionaries.ShowFreq;" desc="" />
+  <setting type="bool" pref="extensions.rikaisama.hidepitchaccentpos" title="&Dictionaries.HidePitchAccentPOS;" desc="" />
   
-  <setting type="string" pref="rikaichan.sfile" title="&ClipSave.Filename;" desc="Example: /sdcard/Download/Words.txt" />
-    <setting type="string" pref="rikaichan.saveformat" title="&ClipSave.SaveFormat;">
+  <setting type="string" pref="extensions.rikaisama.sfile" title="&ClipSave.Filename;" desc="Example: /sdcard/Download/Words.txt" />
+    <setting type="string" pref="extensions.rikaisama.saveformat" title="&ClipSave.SaveFormat;">
     Available save format tokens
     Audio file: $a
     Dictionary form: $d
@@ -25,8 +25,8 @@
     Title: $i
     Translation: $n
   </setting>
-  <setting type="string" pref="rikaichan.atags" title="&ClipSave.AnkiTags;" desc="&ClipSave.AnkiTagsHelp;" />
+  <setting type="string" pref="extensions.rikaisama.atags" title="&ClipSave.AnkiTags;" desc="&ClipSave.AnkiTagsHelp;" />
 
-  <setting type="boolint" pref="rikaichan.snlf" title="&ClipSave.LineEnding;" desc="" on="1" off="0" />
-  <setting type="string" pref="rikaichan.ssep" title="Separator" desc="Valid values are: Tab, Comma, or Space (type in, case-sensative) "/>
+  <setting type="boolint" pref="extensions.rikaisama.snlf" title="&ClipSave.LineEnding;" desc="" on="1" off="0" />
+  <setting type="string" pref="extensions.rikaisama.ssep" title="Separator" desc="Valid values are: Tab, Comma, or Space (type in, case-sensative) "/>
 </vbox>
